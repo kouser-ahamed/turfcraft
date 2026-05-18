@@ -100,21 +100,24 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex gap-4 items-center">
-                <h2 className="text-sm font-semibold text-slate-700">
-                  Hi, {user.name?.split(" ")[0]}!
-                </h2>
+                <div className="flex justify-center items-center gap-1 border rounded-md p-1">
+
 
                 <Avatar size="sm">
                   <Avatar.Image
                     src={user?.image}
                     alt={user?.name}
                     referrerPolicy="no-referrer"
-                  />
+                    />
                   <Avatar.Fallback>
                     {user?.name?.charAt(0)}
                   </Avatar.Fallback>
                 </Avatar>
 
+                <h2 className="text-sm font-semibold text-slate-700">
+                  {user.name?.split(" ")[0]}
+                </h2>
+                    </div>
                 <Button
                   size="sm"
                   className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-4 font-semibold"
