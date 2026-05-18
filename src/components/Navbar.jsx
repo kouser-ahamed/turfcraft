@@ -1,22 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
-import { LuMenu, LuX } from "react-icons/lu";
+import { LuChevronDown, LuMenu, LuX } from "react-icons/lu";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef(null);
 
   const userData = authClient.useSession();
   const user = userData.data?.user;
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target)
+      ) {
+        setProfileMenuOpen(false);
+      }
+    };
+
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        setProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
+  const closeMenus = () => {
+    setMenuOpen(false);
+    setProfileMenuOpen(false);
+  };
+
   const handleSignOut = async () => {
     await authClient.signOut();
-    setMenuOpen(false);
+    closeMenus();
   };
 
   return (
@@ -78,16 +110,6 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-4">
             {!user ? (
               <div className="flex items-center gap-2">
-                <Link href={"/signup"}>
-                  <Button
-                    size="sm"
-                    variant="light"
-                    className="border border-slate-200 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all rounded-full px-4 font-semibold"
-                  >
-                    Register
-                  </Button>
-                </Link>
-
                 <Link href={"/login"}>
                   <Button
                     size="sm"
@@ -99,32 +121,98 @@ const Navbar = () => {
                 </Link>
               </div>
             ) : (
-              <div className="flex gap-4 items-center">
-                <div className="flex justify-center items-center gap-1 border rounded-md p-1">
-
-
-                <Avatar size="sm">
-                  <Avatar.Image
-                    src={user?.image}
-                    alt={user?.name}
-                    referrerPolicy="no-referrer"
-                    />
-                  <Avatar.Fallback>
-                    {user?.name?.charAt(0)}
-                  </Avatar.Fallback>
-                </Avatar>
-
-                <h2 className="text-sm font-semibold text-slate-700">
-                  {user.name?.split(" ")[0]}
-                </h2>
-                    </div>
+              <div className="relative" ref={profileMenuRef}>
                 <Button
+                  type="button"
                   size="sm"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-4 font-semibold"
-                  onClick={handleSignOut}
+                  variant="light"
+                  onClick={() => setProfileMenuOpen((current) => !current)}
+                  className="flex items-center gap-2 border border-slate-200 bg-white/90 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all rounded-full px-3 py-2 font-semibold shadow-sm"
                 >
-                  Logout
+                  <Avatar size="sm">
+                    <Avatar.Image
+                      src={user?.image}
+                      alt={user?.name}
+                      referrerPolicy="no-referrer"
+                    />
+                    <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
+
+                  <span className="max-w-28 truncate text-sm">
+                    {user.name?.split(" ")[0]}
+                  </span>
+
+                  <LuChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${
+                      profileMenuOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
                 </Button>
+
+                <div
+                  className={`absolute right-0 top-full mt-3 w-64 overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-2xl shadow-slate-900/10 transition-all duration-200 ${
+                    profileMenuOpen
+                      ? "translate-y-0 scale-100 opacity-100"
+                      : "pointer-events-none -translate-y-2 scale-95 opacity-0"
+                  }`}
+                >
+                  <div className="border-b border-slate-100 px-4 py-4">
+                    <div className="flex items-center gap-3">
+                      <Avatar size="sm">
+                        <Avatar.Image
+                          src={user?.image}
+                          alt={user?.name}
+                          referrerPolicy="no-referrer"
+                        />
+                        <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+                      </Avatar>
+
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-slate-900">
+                          {user?.name}
+                        </p>
+                        <p className="truncate text-xs text-slate-500">
+                          {user?.email}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-2">
+                    <Link
+                      href="/my-bookings"
+                      onClick={closeMenus}
+                      className="block rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600"
+                    >
+                      My Bookings
+                    </Link>
+
+                    <Link
+                      href="/add-facility"
+                      onClick={closeMenus}
+                      className="block rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600"
+                    >
+                      Add Facility
+                    </Link>
+
+                    <Link
+                      href="/manage-my-facilities"
+                      onClick={closeMenus}
+                      className="block rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600"
+                    >
+                      Manage My Facilities
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={handleSignOut}
+                      className="mt-1 w-full rounded-xl px-4 py-2 text-left text-sm font-semibold text-rose-600 hover:bg-rose-50"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -146,7 +234,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`absolute top-[65px] right-4 w-[220px] bg-white shadow-xl rounded-2xl border border-slate-100 overflow-hidden transition-all duration-300 ease-in-out lg:hidden z-50
+          className={`absolute top-16 right-4 w-56 bg-white shadow-xl rounded-2xl border border-slate-100 overflow-hidden transition-all duration-300 ease-in-out lg:hidden z-50
           ${
             menuOpen
               ? "scale-100 opacity-100 translate-y-0"
@@ -206,17 +294,6 @@ const Navbar = () => {
                       Login
                     </Button>
                   </Link>
-
-                  <Link href="/signup" onClick={() => setMenuOpen(false)}>
-                    <Button
-                      fullWidth
-                      size="sm"
-                      variant="bordered"
-                      className="border-emerald-200 text-emerald-600 hover:bg-emerald-50 rounded-full font-semibold"
-                    >
-                      Register
-                    </Button>
-                  </Link>
                 </div>
               ) : (
                 <div className="flex flex-col gap-3">
@@ -225,16 +302,46 @@ const Navbar = () => {
                       <Avatar.Image
                         src={user?.image}
                         alt={user?.name}
+                        referrerPolicy="no-referrer"
                       />
                       <Avatar.Fallback>
                         {user?.name?.charAt(0)}
                       </Avatar.Fallback>
                     </Avatar>
 
-                    <span className="text-xs font-bold text-slate-700 truncate">
-                      {user.name}
-                    </span>
+                    <div className="min-w-0">
+                      <span className="block truncate text-xs font-bold text-slate-700">
+                        {user.name}
+                      </span>
+                      <span className="block truncate text-[11px] text-slate-500">
+                        {user.email}
+                      </span>
+                    </div>
                   </div>
+
+                  <Link
+                    href="/my-bookings"
+                    onClick={() => setMenuOpen(false)}
+                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
+                  >
+                    My Bookings
+                  </Link>
+
+                  <Link
+                    href="/add-facility"
+                    onClick={() => setMenuOpen(false)}
+                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
+                  >
+                    Add Facility
+                  </Link>
+
+                  <Link
+                    href="/manage-my-facilities"
+                    onClick={() => setMenuOpen(false)}
+                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
+                  >
+                    Manage My Facilities
+                  </Link>
 
                   <Button
                     size="sm"
