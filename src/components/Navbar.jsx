@@ -127,11 +127,11 @@ const Navbar = () => {
                   size="sm"
                   variant="light"
                   onClick={() => setProfileMenuOpen((current) => !current)}
-                  className="flex items-center gap-2 border border-slate-200 bg-white/90 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all rounded-full px-3 py-2 font-semibold shadow-sm"
+                  className="flex items-center gap-2 border border-slate-200 bg-white/90 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all rounded-full px-3 py-2 font-semibold shadow-sm rounded-md"
                 >
                   <Avatar size="sm">
                     <Avatar.Image
-                      src={user?.image}
+                      src={user?.image}     
                       alt={user?.name}
                       referrerPolicy="no-referrer"
                     />
