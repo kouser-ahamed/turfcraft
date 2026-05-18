@@ -8,14 +8,14 @@ const Navbar = () => {
       <nav className=" flex justify-between items-center  py-3 max-w-7xl mx-auto w-full">
         <div className="flex gap-2 items-center">
           <Image
-            src={"/assets/logo.png"}
+            src={"/assets/Logo.png"}
             alt="logo"
             loading="eager"
             width={30}
             height={30}
-            className="object-cover h-auto w-auto"
+            className="object-cover h-auto w-auto rounded-full"
           />
-          <h3 className="font-black text-lg">pixgen.</h3>
+          <h3 className="font-black text-lg">TurfCraft</h3>
         </div>
 
         <ul className="flex items-center gap-5 text-sm">
@@ -23,23 +23,23 @@ const Navbar = () => {
             <Link href={"/"}>Home</Link>
           </li>
           <li>
-            <Link href={"/all-photos"}>All Photos</Link>
+            <Link href={"/all-facilities"}>All Facilities</Link>
           </li>
           <li>
-            <Link href={"/pricing"}>Pricing</Link>
+            <Link href={"/my-bookings"}>My Bookings</Link>
           </li>
           <li>
-            <Link href={"/profile"}>Profile</Link>
+            <Link href={"/add-facility"}>Add Facility</Link>
+          </li>
+          <li>
+            <Link href={"/manage-my-facilities"}>Manage My Facilities</Link>
           </li>
         </ul>
 
         <div className="flex gap-4">
           <ul className="flex items-center  text-sm">
             <li>
-              <Link href={"/signup"}>SignUp</Link>
-            </li>
-            <li>
-              <Link href={"/signin"}>SignIn</Link>
+              <Link href={"/login"}>Login</Link>
             </li>
           </ul>
         </div>
