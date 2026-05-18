@@ -5,12 +5,38 @@ import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import { authClient } from "@/lib/auth-client";
-import { Avatar, Button } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { LuChevronDown, LuMenu, LuX } from "react-icons/lu";
+
+const ProfileAvatar = ({ src, name, sizeClassName }) => {
+  const imageSrc = typeof src === "string" && src.trim() ? src.trim() : null;
+  const initial = name?.charAt(0)?.toUpperCase() || "U";
+
+  return (
+    <span
+      className={`flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 ring-1 ring-slate-200 shadow-sm ${sizeClassName}`}
+    >
+      {imageSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={imageSrc}
+          alt={name || "User profile"}
+          referrerPolicy="no-referrer"
+          className="h-full w-full rounded-full object-cover"
+        />
+      ) : (
+        <span className="flex h-full w-full items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
+          {initial}
+        </span>
+      )}
+    </span>
+  );
+};
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+
   const profileMenuRef = useRef(null);
 
   const userData = authClient.useSession();
@@ -26,18 +52,18 @@ const Navbar = () => {
       }
     };
 
-    const handleEscapeKey = (event) => {
+    const handleEscape = (event) => {
       if (event.key === "Escape") {
         setProfileMenuOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleOutsideClick);
-    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
@@ -52,53 +78,54 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 shadow-sm">
-      <nav className="flex justify-between items-center py-3 px-4 lg:px-10 max-w-7xl mx-auto w-full relative">
+    <header className="sticky top-0 z-50 border-b border-white/20 bg-white/70 backdrop-blur-xl shadow-sm">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 py-3">
+        
         {/* Logo */}
         <Link
-          href={"/"}
-          className="flex gap-2 items-center z-50 transition-opacity hover:opacity-80"
+          href="/"
+          className="flex items-center gap-2 shrink-0"
         >
           <Image
-            src={"/assets/Logo.png"}
+            src="/assets/Logo.png"
             alt="logo"
+            width={40}
+            height={40}
             priority
-            width={35}
-            height={35}
-            className="object-cover h-auto w-auto rounded-full"
+            className="rounded-full object-cover"
           />
 
-          <h1 className="text-xl font-black tracking-tight bg-linear-to-r from-slate-900 via-emerald-800 to-lime-500 bg-clip-text text-transparent">
+          <h1 className="text-xl sm:text-2xl font-black tracking-tight bg-linear-to-r from-slate-900 via-emerald-700 to-lime-500 bg-clip-text text-transparent">
             Turf<span className="text-lime-500">Craft</span>
           </h1>
         </Link>
 
-        {/* Desktop Nav */}
-        <ul className="hidden lg:flex items-center gap-8 text-sm font-semibold">
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex items-center gap-7 text-sm font-semibold">
           <li>
-            <NavLink href={"/"}>Home</NavLink>
+            <NavLink href="/">Home</NavLink>
           </li>
 
           <li>
-            <NavLink href={"/all-facilities"}>
+            <NavLink href="/all-facilities">
               All Facilities
             </NavLink>
           </li>
 
           <li>
-            <NavLink href={"/my-bookings"}>
+            <NavLink href="/my-bookings">
               My Bookings
             </NavLink>
           </li>
 
           <li>
-            <NavLink href={"/add-facility"}>
+            <NavLink href="/add-facility">
               Add Facility
             </NavLink>
           </li>
 
           <li>
-            <NavLink href={"/manage-my-facilities"}>
+            <NavLink href="/manage-my-facilities">
               Manage Facilities
             </NavLink>
           </li>
@@ -106,84 +133,72 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="flex items-center gap-3">
+
           {/* Desktop Auth */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center">
             {!user ? (
-              <div className="flex items-center gap-2">
-                <Link href={"/login"}>
-                  <Button
-                    size="sm"
-                    variant="light"
-                    className="border border-slate-200 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all rounded-full px-4 font-semibold"
-                  >
-                    Login
-                  </Button>
-                </Link>
-              </div>
+              <Link href="/login">
+                <Button
+                  size="sm"
+                  className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-5 font-semibold shadow-md"
+                >
+                  Login
+                </Button>
+              </Link>
             ) : (
               <div className="relative" ref={profileMenuRef}>
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="light"
-                  onClick={() => setProfileMenuOpen((current) => !current)}
-                  className="flex items-center gap-2 border border-slate-200 bg-white/90 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all rounded-full px-3 py-2 font-semibold shadow-sm rounded-md"
+                
+                {/* Profile Button */}
+                <button
+                  onClick={() =>
+                    setProfileMenuOpen((prev) => !prev)
+                  }
+                  className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm hover:border-emerald-200 hover:bg-emerald-50 transition-all"
                 >
-                  <Avatar size="sm">
-                    <Avatar.Image
-                      src={user?.image}     
-                      alt={user?.name}
-                      referrerPolicy="no-referrer"
-                    />
-                    <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
-                  </Avatar>
+                  <ProfileAvatar src={user?.image} name={user?.name} sizeClassName="w-8 h-8" />
 
-                  <span className="max-w-28 truncate text-sm">
-                    {user.name?.split(" ")[0]}
+                  <span className="max-w-24 truncate text-sm font-semibold text-slate-700">
+                    {user?.name?.split(" ")[0]}
                   </span>
 
                   <LuChevronDown
                     size={16}
-                    className={`transition-transform duration-200 ${
-                      profileMenuOpen ? "rotate-180" : "rotate-0"
+                    className={`transition-transform duration-300 ${
+                      profileMenuOpen ? "rotate-180" : ""
                     }`}
                   />
-                </Button>
+                </button>
 
+                {/* Dropdown */}
                 <div
-                  className={`absolute right-0 top-full mt-3 w-64 overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-2xl shadow-slate-900/10 transition-all duration-200 ${
+                  className={`absolute right-0 top-[115%] w-72 rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_20px_60px_rgba(0,0,0,0.12)] transition-all duration-300 ${
                     profileMenuOpen
-                      ? "translate-y-0 scale-100 opacity-100"
-                      : "pointer-events-none -translate-y-2 scale-95 opacity-0"
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible -translate-y-2"
                   }`}
                 >
-                  <div className="border-b border-slate-100 px-4 py-4">
-                    <div className="flex items-center gap-3">
-                      <Avatar size="sm">
-                        <Avatar.Image
-                          src={user?.image}
-                          alt={user?.name}
-                          referrerPolicy="no-referrer"
-                        />
-                        <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
-                      </Avatar>
+                  
+                  {/* User Info */}
+                  <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
+                    <ProfileAvatar src={user?.image} name={user?.name} sizeClassName="w-11 h-11" />
 
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-slate-900">
-                          {user?.name}
-                        </p>
-                        <p className="truncate text-xs text-slate-500">
-                          {user?.email}
-                        </p>
-                      </div>
+                    <div className="min-w-0">
+                      <h4 className="truncate text-sm font-bold text-slate-800">
+                        {user?.name}
+                      </h4>
+
+                      <p className="truncate text-xs text-slate-500">
+                        {user?.email}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="p-2">
+                  {/* Menu Items */}
+                  <div className="mt-2 flex flex-col">
                     <Link
                       href="/my-bookings"
                       onClick={closeMenus}
-                      className="block rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600"
+                      className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
                     >
                       My Bookings
                     </Link>
@@ -191,7 +206,7 @@ const Navbar = () => {
                     <Link
                       href="/add-facility"
                       onClick={closeMenus}
-                      className="block rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600"
+                      className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
                     >
                       Add Facility
                     </Link>
@@ -199,15 +214,14 @@ const Navbar = () => {
                     <Link
                       href="/manage-my-facilities"
                       onClick={closeMenus}
-                      className="block rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600"
+                      className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
                     >
-                      Manage My Facilities
+                      Manage Facilities
                     </Link>
 
                     <button
-                      type="button"
                       onClick={handleSignOut}
-                      className="mt-1 w-full rounded-xl px-4 py-2 text-left text-sm font-semibold text-rose-600 hover:bg-rose-50"
+                      className="mt-1 rounded-xl px-4 py-3 text-left text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-all"
                     >
                       Logout
                     </button>
@@ -218,145 +232,90 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="p-1 hover:bg-slate-100 rounded-md transition-colors"
-            >
-              {menuOpen ? (
-                <LuX size={26} className="text-emerald-600" />
-              ) : (
-                <LuMenu size={26} className="text-emerald-600" />
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden flex items-center justify-center rounded-lg p-2 hover:bg-slate-100 transition"
+          >
+            {menuOpen ? (
+              <LuX size={26} className="text-emerald-600" />
+            ) : (
+              <LuMenu size={26} className="text-emerald-600" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Menu */}
         <div
-          className={`absolute top-16 right-4 w-56 bg-white shadow-xl rounded-2xl border border-slate-100 overflow-hidden transition-all duration-300 ease-in-out lg:hidden z-50
-          ${
+          className={`absolute right-4 top-20 w-[92vw] max-w-sm rounded-3xl border border-slate-100 bg-white/95 backdrop-blur-xl shadow-2xl transition-all duration-300 lg:hidden ${
             menuOpen
-              ? "scale-100 opacity-100 translate-y-0"
-              : "scale-95 opacity-0 -translate-y-2 pointer-events-none"
+              ? "visible opacity-100 translate-y-0"
+              : "invisible opacity-0 -translate-y-3"
           }`}
         >
-          <div className="flex flex-col p-2">
-            <Link
-              href="/"
-              onClick={() => setMenuOpen(false)}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-            >
-              Home
-            </Link>
+          <div className="p-4">
 
-            <Link
-              href="/all-facilities"
-              onClick={() => setMenuOpen(false)}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-            >
-              All Facilities
-            </Link>
+            {/* User Info */}
+            {user && (
+              <div className="mb-4 flex items-center gap-3 rounded-2xl bg-slate-50 p-3">
+                <ProfileAvatar src={user?.image} name={user?.name} sizeClassName="w-10 h-10" />
 
-            <Link
-              href="/my-bookings"
-              onClick={() => setMenuOpen(false)}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-            >
-              My Bookings
-            </Link>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-bold text-slate-800">
+                    {user?.name}
+                  </p>
 
-            <Link
-              href="/add-facility"
-              onClick={() => setMenuOpen(false)}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-            >
-              Add Facility
-            </Link>
+                  <p className="truncate text-xs text-slate-500">
+                    {user?.email}
+                  </p>
+                </div>
+              </div>
+            )}
 
-            <Link
-              href="/manage-my-facilities"
-              onClick={() => setMenuOpen(false)}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg border-b border-slate-100"
-            >
-              Manage Facilities
-            </Link>
+            {/* Links */}
+            <div className="flex flex-col gap-1">
+              {[
+                ["Home", "/"],
+                ["All Facilities", "/all-facilities"],
+                ["My Bookings", "/my-bookings"],
+                ["Add Facility", "/add-facility"],
+                ["Manage Facilities", "/manage-my-facilities"],
+              ].map(([title, href]) => (
+                <Link
+                  key={title}
+                  href={href}
+                  onClick={closeMenus}
+                  className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
+                >
+                  {title}
+                </Link>
+              ))}
+            </div>
 
-            <div className="p-2 pt-3">
+            {/* Auth */}
+            <div className="mt-4">
               {!user ? (
-                <div className="flex flex-col gap-2">
-                  <Link href="/login" onClick={() => setMenuOpen(false)}>
-                    <Button
-                      fullWidth
-                      size="sm"
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold"
-                    >
-                      Login
-                    </Button>
-                  </Link>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-2 px-2">
-                    <Avatar size="sm" className="w-6 h-6">
-                      <Avatar.Image
-                        src={user?.image}
-                        alt={user?.name}
-                        referrerPolicy="no-referrer"
-                      />
-                      <Avatar.Fallback>
-                        {user?.name?.charAt(0)}
-                      </Avatar.Fallback>
-                    </Avatar>
-
-                    <div className="min-w-0">
-                      <span className="block truncate text-xs font-bold text-slate-700">
-                        {user.name}
-                      </span>
-                      <span className="block truncate text-[11px] text-slate-500">
-                        {user.email}
-                      </span>
-                    </div>
-                  </div>
-
-                  <Link
-                    href="/my-bookings"
-                    onClick={() => setMenuOpen(false)}
-                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-                  >
-                    My Bookings
-                  </Link>
-
-                  <Link
-                    href="/add-facility"
-                    onClick={() => setMenuOpen(false)}
-                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-                  >
-                    Add Facility
-                  </Link>
-
-                  <Link
-                    href="/manage-my-facilities"
-                    onClick={() => setMenuOpen(false)}
-                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg"
-                  >
-                    Manage My Facilities
-                  </Link>
-
+                <Link href="/login" onClick={closeMenus}>
                   <Button
-                    size="sm"
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold"
-                    onClick={handleSignOut}
+                    fullWidth
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold"
                   >
-                    Logout
+                    Login
                   </Button>
-                </div>
+                </Link>
+              ) : (
+                <Button
+                  fullWidth
+                  onClick={handleSignOut}
+                  className="bg-rose-600 hover:bg-rose-700 text-white rounded-full font-semibold"
+                >
+                  Logout
+                </Button>
               )}
             </div>
           </div>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 
