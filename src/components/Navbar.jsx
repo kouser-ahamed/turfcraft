@@ -7,34 +7,44 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const getLinkClass = (href) => {
-    const isActive = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+    const isActive =
+      href === "/"
+        ? pathname === "/"
+        : pathname === href || pathname.startsWith(`${href}/`);
 
     return [
-      "pb-1 transition-colors duration-200 border-b-2",
+      "pb-1 transition-all duration-200 border-b-2 font-medium text-sm",
       isActive
-        ? "text-emerald-600 border-emerald-600"
-        : "border-transparent text-slate-700 hover:text-emerald-600 hover:border-emerald-600/60",
+        ? "text-emerald-600 border-emerald-600 font-semibold"
+        : "border-transparent text-slate-600 hover:text-emerald-600 hover:border-emerald-500/50",
     ].join(" ");
   };
 
   return (
-    <div className="border-b border-emerald-100 bg-linear-to-r from-emerald-50 via-white to-lime-50 px-2 shadow-sm">
-      <nav className="flex justify-between items-center py-3 max-w-7xl mx-auto w-full">
-        <div className="flex gap-2 items-center">
+    <div className="bg-white/70 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 px-4 shadow-xs">
+      <nav className="flex justify-between items-center py-3.5 max-w-7xl mx-auto w-full">
+        <Link href="/" className="flex items-center gap-2.5 rounded-full ">
           <Image
             src={"/assets/Logo.png"}
             alt="logo"
-            loading="eager"
-            width={30}
-            height={30}
-            className="object-cover h-auto w-auto rounded-full"
+            priority
+            width={34}
+            height={34}
+            className="object-contain rounded-full"
           />
-          <h3 className="font-black text-lg">TurfCraft</h3>
-        </div>
 
-        <ul className="flex items-center gap-5 text-sm">
+          <h3 className="text-2xl font-black tracking-tight bg-linear-to-r from-slate-900 via-emerald-800 to-lime-500 bg-clip-text text-transparent">
+            Turf<span className="text-lime-500">Craft</span>
+          </h3>
+        </Link>
+
+        <ul className="hidden md:flex items-center gap-6">
           <li>
-            <Link href={"/"} className={getLinkClass("/")} aria-current={pathname === "/" ? "page" : undefined}>
+            <Link
+              href={"/"}
+              className={getLinkClass("/")}
+              aria-current={pathname === "/" ? "page" : undefined}
+            >
               Home
             </Link>
           </li>
@@ -69,21 +79,22 @@ const Navbar = () => {
             <Link
               href={"/manage-my-facilities"}
               className={getLinkClass("/manage-my-facilities")}
-              aria-current={pathname === "/manage-my-facilities" ? "page" : undefined}
+              aria-current={
+                pathname === "/manage-my-facilities" ? "page" : undefined
+              }
             >
-              Manage My Facilities
+              Manage Facilities
             </Link>
           </li>
         </ul>
 
-        <div className="flex gap-4">
-          <ul className="flex items-center  text-sm">
-            <li>
-              <Link href={"/login"} className={getLinkClass("/login")} aria-current={pathname === "/login" ? "page" : undefined}>
-                Login
-              </Link>
-            </li>
-          </ul>
+        <div className="flex items-center gap-4">
+          <Link
+            href={"/login"}
+            className="border border-slate-200 text-slate-700 px-4 py-1.5 rounded-full text-sm font-medium hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all shadow-2xs"
+          >
+            Login
+          </Link>
         </div>
       </nav>
     </div>
