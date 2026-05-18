@@ -5,34 +5,40 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="container mx-auto">
+    <div className="max-w-7xl mx-auto px-4">
       <div
         className="
-          relative w-full overflow-hidden mt-8 shadow-2xl
-          h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px]
-          bg-cover bg-center bg-no-repeat rounded-md
+          relative w-full overflow-hidden mt-6 shadow-xl
+          h-[320px] sm:h-[380px] md:h-[420px] lg:h-[480px]
+          bg-cover bg-center bg-no-repeat rounded-2xl
         "
         style={{
           backgroundImage: "url('/assets/football.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent flex items-center">
-          <div className="w-full px-6 sm:px-12 md:px-16 text-white">
-            <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-7xl font-extrabold mb-3 md:mb-6 max-w-full leading-[1.1] tracking-tight whitespace-nowrap">
-              Play Without Limits. Book in Seconds.
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent flex items-center">
+          <div className="w-full max-w-3xl px-6 sm:px-12 md:px-16 text-white">
+            
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-black mb-3 md:mb-5 leading-tight tracking-tight">
+              Play Without Limits. <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-emerald-400 to-lime-400 bg-clip-text text-transparent">
+                Book in Seconds.
+              </span>
             </h1>
-            <p className="text-sm sm:text-lg md:text-xl mb-6 md:mb-8 max-w-[250px] sm:max-w-sm md:max-w-xl text-gray-300 leading-relaxed">
+            
+            <p className="text-xs sm:text-sm md:text-base mb-6 md:mb-8 max-w-[280px] sm:max-w-md md:max-w-xl text-slate-200 font-normal leading-relaxed">
               Discover and reserve premium football turfs, indoor badminton courts, swimming lanes, and tennis courts near you. Experience seamless scheduling, instant slot confirmation, and hassle-free booking management—all in one premium platform.
             </p>
 
             <Link href="/all-facilities" passHref>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-[#1da3b8] to-[#b29642] text-white font-bold px-8 py-6 rounded-full hover:scale-105 transition-transform text-sm sm:text-base shadow-xl"
+                className="bg-gradient-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white font-semibold px-8 py-5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all text-xs sm:text-sm shadow-lg shadow-emerald-900/20"
               >
                 Explore Facilities
               </Button>
             </Link>
+
           </div>
         </div>
       </div>

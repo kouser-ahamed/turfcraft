@@ -1,12 +1,11 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const outfit = Outfit({
   subsets: ["latin"],
 });
-
-
 
 export const metadata = {
   title: "Create Next App",
@@ -15,14 +14,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${outfit.className} h-full antialiased`}
-    >
+    <html lang="en" className={`${outfit.className} h-full antialiased`}>
       <body>
         <Navbar />
         <main className="max-w-7xl mx-auto">{children} </main>
-        </body>
+        <Footer />
+      </body>
     </html>
   );
 }
