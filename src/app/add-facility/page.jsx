@@ -126,7 +126,6 @@ const AddFacilityPage = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="min-h-screen  px-4 py-10">
       <div className="mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/40 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
         
