@@ -44,8 +44,7 @@ const AddFacilityPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.currentTarget; // store reference before any await (React pools events)
-
+    const form = e.currentTarget; 
     if (timeSlots.length === 0) {
       toast.error("Please add at least one time slot", {
         position: "top-right",
@@ -57,7 +56,6 @@ const AddFacilityPage = () => {
     const formData = new FormData(form);
     const faceilityData = Object.fromEntries(formData.entries());
 
-    // Validate numeric fields to ensure positive values
     const priceVal = Number(faceilityData.pricePerHour);
     const capacityVal = Number(faceilityData.capacity);
 
@@ -103,7 +101,7 @@ const AddFacilityPage = () => {
         position: "top-right",
         autoClose: 1000,
       });
-      // reset form and clear slot state
+   
       try {
         form.reset();
       } catch (err) {
@@ -129,7 +127,7 @@ const AddFacilityPage = () => {
       <div className="min-h-screen  px-4 py-10">
       <div className="mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/40 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
         
-        {/* Top Banner */}
+   
         <div className="relative overflow-hidden bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 px-8 py-12 text-white md:px-12">
           <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
           <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-white/10 blur-3xl"></div>
@@ -143,7 +141,7 @@ const AddFacilityPage = () => {
           </p>
         </div>
 
-        {/* Form */}
+   
         <form
           onSubmit={handleSubmit}
           className="space-y-10 px-6 py-10 md:px-12"

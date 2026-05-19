@@ -1,3 +1,4 @@
+import { ManageEditModal } from '@/components/ManageEditModal';
 import { ManageMyFacilitiesDelete } from '@/components/ManageMyFacilitiesDelete';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
@@ -115,10 +116,7 @@ const ManageMyFacilities = async () => {
        
                            <div className="pt-4 md:pt-0 border-t border-slate-100 md:border-none flex flex-row md:flex-col gap-2.5 w-full md:w-auto justify-end md:justify-center">
                               {/* Edit Button */}
-                              <button className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl border border-slate-200 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 hover:text-emerald-600 active:scale-[0.98]">
-                                <FiEdit3 className="text-base" />
-                                <span>Edit</span>
-                              </button>
+                            <ManageEditModal facility={facility}/>
 
                               {/* Fixed Delete Component */}
                              <ManageMyFacilitiesDelete facility={facility}/>
