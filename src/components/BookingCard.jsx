@@ -13,6 +13,7 @@ const BookingCard = ({ facility }) => {
   const user = session?.user;
 
   const facilityName = facility?.facilityName || "";
+  const imageUrl = facility?.imageUrl || "";
 
   const facilityId = facility?._id || "";
 
@@ -50,6 +51,7 @@ const BookingCard = ({ facility }) => {
 
       bookingDate,
       timeSlot,
+      imageUrl,
 
       hours: Number(hours),
 
