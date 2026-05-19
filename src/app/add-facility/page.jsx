@@ -23,9 +23,15 @@ const AddFacilityPage = () => {
 
     if (!trimmedSlot) return;
 
-    if (!timeSlots.includes(trimmedSlot)) {
-      setTimeSlots((prev) => [...prev, trimmedSlot]);
+    if (timeSlots.includes(trimmedSlot)) {
+      toast.error("This time slot is already added. Please choose another slot.", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
     }
+
+    setTimeSlots((prev) => [...prev, trimmedSlot]);
 
     setCurrentSlot("");
   };
