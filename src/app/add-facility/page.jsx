@@ -38,6 +38,7 @@ const AddFacilityPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget; // store reference before any await (React pools events)
 
     if (timeSlots.length === 0) {
       toast.error("Please add at least one time slot", {
@@ -47,7 +48,7 @@ const AddFacilityPage = () => {
       return;
     }
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const faceilityData = Object.fromEntries(formData.entries());
 
     const payload = {
@@ -76,6 +77,14 @@ const AddFacilityPage = () => {
         position: "top-right",
         autoClose: 1000,
       });
+      // reset form and clear slot state
+      try {
+        form.reset();
+      } catch (err) {
+        /* ignore */
+      }
+      setTimeSlots([]);
+      setCurrentSlot("");
     } else {
       toast.error(data.message || "Failed to add facility", {
         position: "top-right",
