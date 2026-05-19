@@ -1,13 +1,17 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { MdAdd, MdSportsSoccer } from "react-icons/md";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FiImage, FiUsers } from "react-icons/fi";
 import { TbCurrencyDollar } from "react-icons/tb";
+import { authClient } from "@/lib/auth-client";
 
-export default function AddFacilityForm() {
+const AddFacilityPage = () => {
+   const userData = authClient.useSession();
+    const user = userData.data?.user;
+    console.log("Current User:", user);
 
   const [timeSlots, setTimeSlots] = useState([]);
   const [currentSlot, setCurrentSlot] = useState("");       
@@ -36,6 +40,7 @@ export default function AddFacilityForm() {
     const faceilityData = Object.fromEntries(formData.entries());
 
     console.log(faceilityData);
+  
 
   };
 
@@ -243,3 +248,4 @@ export default function AddFacilityForm() {
     </div>
   );
 }
+export default AddFacilityPage;
