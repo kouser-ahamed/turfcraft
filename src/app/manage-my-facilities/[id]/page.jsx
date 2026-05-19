@@ -120,9 +120,8 @@ const ManageEditFacilitiesPage = ({ facility }) => {
           autoClose: 1000,
         });
         
-        // রিডাইরেক্ট বা রিফ্রেশ পলিসি
         setTimeout(() => {
-          router.push("/manage-my-facilities"); // আপনার ড্যাশবোর্ড বা লিস্ট পেজের রুট দিন
+          router.push("/manage-my-facilities"); 
           router.refresh();
         }, 800);
       } else {
@@ -326,7 +325,7 @@ const ManageEditFacilitiesPage = ({ facility }) => {
         <div className="flex flex-row gap-4 pt-6 border-t border-slate-100">
           <Button
             type="button"
-            onClick={() => router.back()} // আগের পেজে ব্যাক করবে
+            onClick={() => router.back()} 
             className="flex-1 h-12 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider transition-colors"
           >
             Go Back
