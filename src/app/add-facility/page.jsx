@@ -7,6 +7,8 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FiImage, FiUsers } from "react-icons/fi";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { authClient } from "@/lib/auth-client";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddFacilityPage = () => {
    const userData = authClient.useSession();
@@ -36,6 +38,15 @@ const AddFacilityPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (timeSlots.length === 0) {
+      toast.error("Please add at least one time slot", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
     const faceilityData = Object.fromEntries(formData.entries());
 
@@ -59,6 +70,18 @@ const AddFacilityPage = () => {
 
     const data = await res.json();
     console.log("Server Response:", data);
+
+    if (res.ok) {
+      toast.success("Facility added successfully!", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+    } else {
+      toast.error(data.message || "Failed to add facility", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+    }
     
 
     
@@ -67,7 +90,9 @@ const AddFacilityPage = () => {
   };
 
   return (
-    <div className="min-h-screen  px-4 py-10">
+    <>
+      <ToastContainer />
+      <div className="min-h-screen  px-4 py-10">
       <div className="mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/40 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
         
         {/* Top Banner */}
@@ -268,6 +293,7 @@ const AddFacilityPage = () => {
         </form>
       </div>
     </div>
+    </>
   );
 }
 export default AddFacilityPage;
