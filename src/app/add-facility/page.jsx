@@ -51,6 +51,26 @@ const AddFacilityPage = () => {
     const formData = new FormData(form);
     const faceilityData = Object.fromEntries(formData.entries());
 
+    // Validate numeric fields to ensure positive values
+    const priceVal = Number(faceilityData.pricePerHour);
+    const capacityVal = Number(faceilityData.capacity);
+
+    if (isNaN(priceVal) || priceVal <= 0) {
+      toast.error("Price per hour must be a positive number", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
+    if (isNaN(capacityVal) || capacityVal <= 0) {
+      toast.error("Capacity must be a positive number", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     const payload = {
       ...faceilityData,
       availableTimeSlots: timeSlots,
@@ -210,6 +230,15 @@ const AddFacilityPage = () => {
                 name="pricePerHour"
                 required
                 placeholder="$100"
+                min="1"
+                step="1"
+                inputMode="numeric"
+                onInvalid={(e) => {
+                  e.currentTarget.setCustomValidity(
+                    "Price per hour must be greater than 0"
+                  );
+                }}
+                onInput={(e) => e.currentTarget.setCustomValidity("")}
                 className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
               />
             </div>
@@ -226,6 +255,15 @@ const AddFacilityPage = () => {
                 name="capacity"
                 required
                 placeholder="22 Players"
+                min="1"
+                step="1"
+                inputMode="numeric"
+                onInvalid={(e) => {
+                  e.currentTarget.setCustomValidity(
+                    "Capacity must be greater than 0"
+                  );
+                }}
+                onInput={(e) => e.currentTarget.setCustomValidity("")}
                 className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
               />
             </div>
