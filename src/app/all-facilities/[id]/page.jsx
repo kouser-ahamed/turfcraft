@@ -1,3 +1,4 @@
+import BookingCard from "@/components/BookingCard";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import { MdOutlineReduceCapacity } from "react-icons/md";
@@ -49,7 +50,9 @@ const FacilityDetailsPage = async ({ params }) => {
           </span>
         </div>
 
-        {/* Content */}
+       <div className="flex justify-between">
+
+         {/* Content */}
         <div className="space-y-5 p-6">
           
           {/* Name */}
@@ -109,6 +112,10 @@ const FacilityDetailsPage = async ({ params }) => {
           </Button>
 
         </div>
+        <div>
+            <BookingCard  facility={facility}/>
+        </div>
+       </div>
       </div>
     </div>
   );
