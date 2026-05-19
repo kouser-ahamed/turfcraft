@@ -40,6 +40,24 @@ const AddFacilityPage = () => {
     const faceilityData = Object.fromEntries(formData.entries());
 
     console.log(faceilityData);
+
+
+
+    const res = await fetch("http://localhost:5000/addfacility",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+
+      body: JSON.stringify(faceilityData)
+    });
+
+    const data = await res.json();
+    console.log("Server Response:", data);
+    
+
+    
   
 
   };
