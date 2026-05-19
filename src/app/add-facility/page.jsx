@@ -1,11 +1,245 @@
-import React from 'react';
+"use client";
 
-const AddFacility = () => {
-    return (
-        <div>
-            Add Facility Page
-        </div>
+import { useState, useTransition } from "react";
+import { IoIosRemoveCircle } from "react-icons/io";
+import { MdAdd, MdSportsSoccer } from "react-icons/md";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { FiImage, FiUsers } from "react-icons/fi";
+import { TbCurrencyDollar } from "react-icons/tb";
+
+export default function AddFacilityForm() {
+
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [currentSlot, setCurrentSlot] = useState("");       
+
+  const handleAddSlot = () => {
+    const trimmedSlot = currentSlot.trim();
+
+    if (!trimmedSlot) return;
+
+    if (!timeSlots.includes(trimmedSlot)) {
+      setTimeSlots((prev) => [...prev, trimmedSlot]);
+    }
+
+    setCurrentSlot("");
+  };
+
+  const handleRemoveSlot = (indexToRemove) => {
+    setTimeSlots((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
     );
-}
+  };
 
-export default AddFacility;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const faceilityData = Object.fromEntries(formData.entries());
+
+    console.log(faceilityData);
+
+  };
+
+  return (
+    <div className="min-h-screen  px-4 py-10">
+      <div className="mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/40 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
+        
+        {/* Top Banner */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 px-8 py-12 text-white md:px-12">
+          <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-white/10 blur-3xl"></div>
+
+          <h1 className="relative text-3xl font-black md:text-5xl text-center"> 
+            Add Your Sports Facility
+          </h1>
+
+          <p className="relative  mt-3 max-w-2xl text-sm text-white/90 mx-auto text-center">
+            Create a beautiful listing and let players discover your venue.
+          </p>
+        </div>
+
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-10 px-6 py-10 md:px-12"
+        >
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            
+            {/* Facility Name */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <MdSportsSoccer className="text-green-500" />
+                Facility Name
+              </label>
+
+              <input
+                type="text"
+                name="facilityName"
+                required
+                placeholder="Champions Sports Complex"
+                className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              />
+            </div>
+
+            {/* Facility Type */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <MdSportsSoccer className="text-green-500" />
+                Facility Type
+              </label>
+
+              <select
+                name="sportType"
+                required
+                defaultValue=""
+                className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              >
+                <option value="" disabled>
+                  Select Type
+                </option>
+
+                <option value="Football">Football</option>
+                <option value="Badminton">Badminton</option>
+                <option value="Swimming">Swimming</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Volleyball">Volleyball</option>
+              </select>
+            </div>
+
+            {/* Image URL */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <FiImage className="text-green-500" />
+                Image URL (imgbb/postimage)
+              </label>
+
+              <input
+                type="url"
+                name="imageUrl"
+                required
+                placeholder="https://images.unsplash.com/sports-facility.jpg"
+                className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              />
+            </div>
+
+            {/* Location */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <HiOutlineLocationMarker className="text-green-500" />
+                Location
+              </label>
+
+              <input
+                type="text"
+                name="location"
+                required
+                placeholder="Dhanmondi, Dhaka, Bangladesh"
+                className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              />
+            </div>
+
+            {/* Price */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <TbCurrencyDollar className="text-green-500" />
+                Price Per Hour
+              </label>
+
+              <input
+                type="number"
+                name="pricePerHour"
+                required
+                placeholder="$100"
+                className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              />
+            </div>
+
+            {/* Capacity */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <FiUsers className="text-green-500" />
+                Capacity
+              </label>
+
+              <input
+                type="number"
+                name="capacity"
+                required
+                placeholder="22 Players"
+                className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              />
+            </div>
+
+            {/* Time Slots */}
+            <div className="md:col-span-2">
+              <label className="mb-3 block text-sm font-semibold text-gray-700">
+                Available Time Slots
+              </label>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="text"
+                  value={currentSlot}
+                  onChange={(e) => setCurrentSlot(e.target.value)}
+                  placeholder="08:00 AM - 09:00 AM"
+                  className="h-14 flex-1 rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+                />
+
+                <button
+                  type="button"
+                  onClick={handleAddSlot}
+                  className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 font-semibold text-white shadow-lg transition hover:scale-[1.02]"
+                >
+                  <MdAdd className="text-xl" />
+                  Add Slot
+                </button>
+              </div>
+
+              {timeSlots.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {timeSlots.map((slot, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 px-4 py-2 text-sm font-medium text-green-700 shadow-sm"
+                    >
+                      {slot}
+
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSlot(index)}
+                        className="text-lg text-red-500 transition hover:scale-110"
+                      >
+                        <IoIosRemoveCircle />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Description */}
+            <div className="md:col-span-2">
+              <label className="mb-3 block text-sm font-semibold text-gray-700">
+                Description
+              </label>
+
+              <textarea
+                name="description"
+                required
+                placeholder="Describe your facility..."
+                className="min-h-[180px] w-full resize-none rounded-3xl border border-gray-200 bg-gray-50 p-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+              />
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="h-14 w-full rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-base font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
+          >
+            Add Facility
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
