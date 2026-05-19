@@ -39,18 +39,22 @@ const AddFacilityPage = () => {
     const formData = new FormData(e.currentTarget);
     const faceilityData = Object.fromEntries(formData.entries());
 
-    console.log(faceilityData);
+    const payload = {
+      ...faceilityData,
+      availableTimeSlots: timeSlots,
+      userId: user?.id || "",
+      userEmail: user?.email || "",
+    };
 
-
-
-    const res = await fetch("http://localhost:5000/addfacility",{
+    console.log(payload);
+    const res = await fetch("http://localhost:5000/facility",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
 
 
-      body: JSON.stringify(faceilityData)
+      body: JSON.stringify(payload)
     });
 
     const data = await res.json();
@@ -111,7 +115,7 @@ const AddFacilityPage = () => {
               </label>
 
               <select
-                name="sportType"
+                name="facilityType"
                 required
                 defaultValue=""
                 className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
