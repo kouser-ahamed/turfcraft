@@ -33,6 +33,8 @@ const ManageMyFacilities = async () => {
 });
 console.log("Token in FacilityDetailsPage:", token);
 
+  // done token verify
+
   const res = await fetch(`http://localhost:5000/facility/user/${user?.id}`,{
     headers: {
       authorization: `Bearer ${token}`

@@ -26,6 +26,8 @@ if (!session?.user) {
       headers:  await headers()
   });
   console.log("Token in FacilityDetailsPage:", token);
+
+  
    // done token verify 
   const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
     headers: {
