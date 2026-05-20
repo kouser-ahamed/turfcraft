@@ -41,7 +41,7 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
           params.append("type", types.join(","));
         }
 
-        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/facility${
+        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/facility-search${
           params.toString() ? "?" + params.toString() : ""
         }`;
 
