@@ -9,7 +9,11 @@ import { VscLocation } from "react-icons/vsc";
 const FacilityDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/facility/${id}`);
+  const res = await fetch(`http://localhost:5000/facility/${id}`,{
+    headers: {
+      authorization: "logged in"
+    }
+  });
 
   if (!res.ok) {
     return (
