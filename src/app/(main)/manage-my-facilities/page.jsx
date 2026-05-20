@@ -37,7 +37,7 @@ const ManageMyFacilities = async () => {
 
   // done token verify
 
-  const res = await fetch(`http://localhost:5000/facility/user/${user?.id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facility/user/${user?.id}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },

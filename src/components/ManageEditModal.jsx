@@ -86,7 +86,7 @@ export function ManageEditModal({ facility }) {
       const { data: tokenData } = await authClient.token();
 
       const res = await fetch(
-        `http://localhost:5000/facility/${facility?._id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/facility/${facility?._id}`,
         {
           method: "PATCH",
           headers: {
