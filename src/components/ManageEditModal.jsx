@@ -8,6 +8,7 @@ import { IoIosRemoveCircle } from "react-icons/io";
 import { MdAdd, MdSportsSoccer } from "react-icons/md";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 export function ManageEditModal({ facility }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,8 +75,13 @@ export function ManageEditModal({ facility }) {
       return;
     }
 
+    // token data contains the token and other info, we need tokenData.token for authorization header
+    // const {data:tokenData} = await authClient.token();
+    // authorization: `Bearer ${tokenData?.token}`
+
     try {
       setIsUpdating(true);
+      const { data: tokenData } = await authClient.token();
 
       const res = await fetch(
         `http://localhost:5000/facility/${facility?._id}`,
@@ -83,6 +89,7 @@ export function ManageEditModal({ facility }) {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${tokenData?.token}`,
           },
           body: JSON.stringify(payload),
         },

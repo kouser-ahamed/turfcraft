@@ -96,10 +96,18 @@ const AddFacilityPage = () => {
     };
 
     console.log(payload);
+
+    // token data contains the token and other info, we need tokenData.token for authorization header
+    // const {data:tokenData} = await authClient.token();
+    // authorization: `Bearer ${tokenData?.token}`
+
+    const {data:tokenData} = await authClient.token();
+
     const res = await fetch("http://localhost:5000/facility", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
 
       body: JSON.stringify(payload),

@@ -1,25 +1,28 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 
-export function ManageMyFacilitiesDelete({ facility}) {
-  const { _id, facilityName} = facility;
+export function ManageMyFacilitiesDelete({ facility }) {
+  const { _id, facilityName } = facility;
 
+  // token data contains the token and other info, we need tokenData.token for authorization header
+  // const {data:tokenData} = await authClient.token();
+  // authorization: `Bearer ${tokenData?.token}`
 
   const handleDeleteFacility = async () => {
-
+    const { data: tokenData } = await authClient.token();
 
     const res = await fetch(`http://localhost:5000/facility/${_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
     });
     const data = await res.json();
     window.location.reload();
-
-
-  }
+  };
   return (
     <AlertDialog>
       <Button className="w-full md:w-auto h-11 px-5 rounded-xl border border-slate-200 bg-white text-xs font-bold  tracking-wider text-rose-600 shadow-xs transition-all duration-200 hover:bg-rose-50 hover:border-rose-200 active:scale-[0.98]">
@@ -37,15 +40,20 @@ export function ManageMyFacilitiesDelete({ facility}) {
             </AlertDialog.Header>
             <AlertDialog.Body>
               <p>
-                This will permanently delete <strong>{facility.facilityName}</strong>{" "}
-                and all of its data. This action cannot be undone.
+                This will permanently delete{" "}
+                <strong>{facility.facilityName}</strong> and all of its data.
+                This action cannot be undone.
               </p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
               <Button slot="close" variant="tertiary">
                 Cancel
               </Button>
-              <Button onClick={handleDeleteFacility} slot="close" variant="danger">
+              <Button
+                onClick={handleDeleteFacility}
+                slot="close"
+                variant="danger"
+              >
                 Delete Facility
               </Button>
             </AlertDialog.Footer>
