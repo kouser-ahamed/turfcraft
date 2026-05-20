@@ -11,7 +11,11 @@ const MyBookings = async () => {
     headers: await headers(),
   });
 
+
+ 
+
   const user = session?.user;
+
 
   console.log(user);
 
