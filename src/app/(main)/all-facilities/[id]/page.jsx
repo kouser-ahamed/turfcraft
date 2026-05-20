@@ -16,6 +16,8 @@ const FacilityDetailsPage = async ({ params }) => {
 });
 console.log("Token in FacilityDetailsPage:", token);
 
+ // done token verify
+
   const res = await fetch(`http://localhost:5000/facility/${id}`,{
     headers: {
       authorization: `Bearer ${token}`

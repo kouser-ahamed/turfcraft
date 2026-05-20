@@ -22,7 +22,18 @@ if (!session?.user) {
 
   console.log(user);
 
-  const res = await fetch(`http://localhost:5000/booking/${user?.id}`);
+  const {token} = await auth.api.getToken({
+      headers:  await headers()
+  });
+  console.log("Token in FacilityDetailsPage:", token);
+   // done token verify 
+  const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  }
+
+  );
 
   const bookings = await res.json();
   console.log(bookings);
