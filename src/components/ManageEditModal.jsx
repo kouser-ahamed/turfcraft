@@ -75,6 +75,8 @@ export function ManageEditModal({ facility }) {
       return;
     }
 
+    // token verify client side
+
     // token data contains the token and other info, we need tokenData.token for authorization header
     // const {data:tokenData} = await authClient.token();
     // authorization: `Bearer ${tokenData?.token}`

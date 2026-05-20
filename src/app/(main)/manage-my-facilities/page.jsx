@@ -28,6 +28,8 @@ const ManageMyFacilities = async () => {
   }
 
   const user = session?.user;
+
+  // token verify server side
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });

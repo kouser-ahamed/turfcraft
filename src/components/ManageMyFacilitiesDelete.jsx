@@ -6,11 +6,14 @@ import { AlertDialog, Button } from "@heroui/react";
 export function ManageMyFacilitiesDelete({ facility }) {
   const { _id, facilityName } = facility;
 
+  // token verify client side
+
   // token data contains the token and other info, we need tokenData.token for authorization header
   // const {data:tokenData} = await authClient.token();
   // authorization: `Bearer ${tokenData?.token}`
 
   const handleDeleteFacility = async () => {
+    
     const { data: tokenData } = await authClient.token();
 
     const res = await fetch(`http://localhost:5000/facility/${_id}`, {

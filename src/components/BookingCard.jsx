@@ -68,18 +68,20 @@ const BookingCard = ({ facility }) => {
     try {
       setLoading(true);
 
-      const {data:tokenData} = await authClient.token();
-
+      
+      // token verify client side
+      
       // token data contains the token and other info, we need tokenData.token for authorization header
       // const {data:tokenData} = await authClient.token();
       // authorization: `Bearer ${tokenData?.token}`
-
-
+      
+      const { data: tokenData } = await authClient.token();
+      
       const res = await fetch("http://localhost:5000/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${tokenData?.token}`
+          authorization: `Bearer ${tokenData?.token}`,
         },
         body: JSON.stringify(bookingData),
       });
@@ -110,7 +112,6 @@ const BookingCard = ({ facility }) => {
 
   return (
     <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-100/70 ring-1 ring-slate-100">
-     
       <div className="mb-6 border-b border-slate-50 pb-4">
         <h2 className="text-2xl font-black tracking-tight text-slate-800">
           Reserve Your Slot
@@ -120,10 +121,7 @@ const BookingCard = ({ facility }) => {
         </p>
       </div>
 
-    
       <form onSubmit={handleSubmit} className="space-y-5">
-        
-       
         <div>
           <label className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
             <FiLayers className="text-slate-400" />
@@ -137,7 +135,6 @@ const BookingCard = ({ facility }) => {
           />
         </div>
 
-       
         <div>
           <label className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
             <FiCalendar className="text-slate-400" />
@@ -172,7 +169,6 @@ const BookingCard = ({ facility }) => {
           </select>
         </div>
 
-       
         <div>
           <label className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
             <FiUser className="text-slate-400" />

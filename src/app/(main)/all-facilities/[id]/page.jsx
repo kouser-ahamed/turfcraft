@@ -11,17 +11,19 @@ import { VscLocation } from "react-icons/vsc";
 const FacilityDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const {token} = await auth.api.getToken({
-    headers:  await headers()
-});
-console.log("Token in FacilityDetailsPage:", token);
+  // token verify server side
 
- // done token verify
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  console.log("Token in FacilityDetailsPage:", token);
 
-  const res = await fetch(`http://localhost:5000/facility/${id}`,{
+  // done token verify
+
+  const res = await fetch(`http://localhost:5000/facility/${id}`, {
     headers: {
-      authorization: `Bearer ${token}`
-    }
+      authorization: `Bearer ${token}`,
+    },
   });
 
   if (!res.ok) {

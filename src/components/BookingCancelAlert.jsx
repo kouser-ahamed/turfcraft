@@ -10,6 +10,8 @@ export function BookingCancelAlert({ booking }) {
   const handleCancelBooking = async () => {
     // fetch(`http://localhost:5000/facility/${_id}
 
+    // token verify client side
+
     // token data contains the token and other info, we need tokenData.token for authorization header
     // const {data:tokenData} = await authClient.token();
     // authorization: `Bearer ${tokenData?.token}`
