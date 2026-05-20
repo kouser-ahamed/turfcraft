@@ -1,5 +1,7 @@
+import { ManageEditModal } from "@/components/ManageEditModal";
 import { ManageMyFacilitiesDelete } from "@/components/ManageMyFacilitiesDelete";
 import { auth } from "@/lib/auth";
+import { Button } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,27 +20,25 @@ const ManageMyFacilities = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  
+
   // user must be logged in to view their bookings then logout korle loginpage  ejbe
 
   if (!session?.user) {
     redirect("/login");
   }
-   
-
 
   const user = session?.user;
-  const {token} = await auth.api.getToken({
-    headers:  await headers()
-});
-console.log("Token in FacilityDetailsPage:", token);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  console.log("Token in FacilityDetailsPage:", token);
 
   // done token verify
 
-  const res = await fetch(`http://localhost:5000/facility/user/${user?.id}`,{
+  const res = await fetch(`http://localhost:5000/facility/user/${user?.id}`, {
     headers: {
-      authorization: `Bearer ${token}`
-    }
+      authorization: `Bearer ${token}`,
+    },
   });
   const facilities = await res.json();
 
@@ -158,15 +158,8 @@ console.log("Token in FacilityDetailsPage:", token);
 
                     <div className="pt-4 md:pt-0 border-t border-slate-100 md:border-none flex flex-row md:flex-col gap-2.5 w-full md:w-auto justify-end md:justify-center">
                       {/* Edit Button */}
-                      
-                      
-                      <Link
-                        href={`/manage-my-facilities/${facility._id}`}
-                        className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl border border-slate-200 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 hover:text-emerald-600 active:scale-[0.98]"
-                      >
-                        <FiEdit3 className="text-base" />
-                        <span>Edit</span>
-                      </Link>
+
+                      <ManageEditModal facility={facility} />
 
                       {/* Fixed Delete Component */}
                       <ManageMyFacilitiesDelete facility={facility} />

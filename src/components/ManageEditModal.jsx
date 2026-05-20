@@ -54,8 +54,7 @@ export function ManageEditModal({ facility }) {
     }
 
     const formData = new FormData(form);
-    
-   
+
     const payload = {
       facilityName: formData.get("facilityName"),
       facilityType: formData.get("facilityType"),
@@ -64,7 +63,7 @@ export function ManageEditModal({ facility }) {
       pricePerHour: Number(formData.get("pricePerHour")),
       capacity: Number(formData.get("capacity")),
       description: formData.get("description"),
-      availableTimeSlots: timeSlots, 
+      availableTimeSlots: timeSlots,
     };
 
     if (payload.pricePerHour <= 0 || payload.capacity <= 0) {
@@ -77,15 +76,17 @@ export function ManageEditModal({ facility }) {
 
     try {
       setIsUpdating(true);
-      
-      
-      const res = await fetch(`http://localhost:5000/facility/${facility?._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
+
+      const res = await fetch(
+        `http://localhost:5000/facility/${facility?._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload), 
-      });
+      );
 
       const data = await res.json();
       console.log("Server Edit Response:", data);
@@ -95,17 +96,18 @@ export function ManageEditModal({ facility }) {
           position: "top-right",
           autoClose: 1000,
         });
-        
+
         setIsOpen(false);
-        
-       
+
         setTimeout(() => {
           window.location.reload();
         }, 800);
       } else {
-       
         if (data.matchedCount > 0 && data.modifiedCount === 0) {
-          toast.info("No changes were made.", { position: "top-right", autoClose: 1000 });
+          toast.info("No changes were made.", {
+            position: "top-right",
+            autoClose: 1000,
+          });
           setIsOpen(false);
           return;
         }
@@ -124,13 +126,16 @@ export function ManageEditModal({ facility }) {
 
   return (
     <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
-    
-      
-      <Modal.Backdrop className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs transition-opacity duration-300 items-center justify-center">
-        <Modal.Container className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <Button className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl border border-slate-200 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 hover:text-emerald-600 active:scale-[0.98]">
+        <FiEdit3 className="text-base" />
+        <span>Edit</span>
+      </Button>
+
+      <Modal.Backdrop className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs transition-opacity duration-300">
+        <Modal.Container className="flex items-center justify-center w-full h-full p-4">
           <Modal.Dialog className="w-full sm:max-w-2xl bg-white rounded-3xl border border-slate-100 shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 ease-out duration-300">
             <Modal.CloseTrigger className="absolute right-4 top-4 rounded-lg p-1 text-slate-400 hover:bg-slate-50 transition-colors z-10" />
-            
+
             <Modal.Header className="flex items-center gap-3 p-6 border-b border-slate-100">
               <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
                 <FiEdit3 className="size-5" />
@@ -143,8 +148,6 @@ export function ManageEditModal({ facility }) {
             <Modal.Body className="p-6 overflow-y-auto custom-scrollbar">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  
-               
                   <div>
                     <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                       <MdSportsSoccer className="text-emerald-500 text-base" />
@@ -159,7 +162,6 @@ export function ManageEditModal({ facility }) {
                     />
                   </div>
 
-                 
                   <div>
                     <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                       <MdSportsSoccer className="text-emerald-500 text-base" />
@@ -179,7 +181,6 @@ export function ManageEditModal({ facility }) {
                     </select>
                   </div>
 
-               
                   <div>
                     <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                       <FiImage className="text-emerald-500 text-base" />
@@ -194,7 +195,6 @@ export function ManageEditModal({ facility }) {
                     />
                   </div>
 
-               
                   <div>
                     <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                       <HiOutlineLocationMarker className="text-emerald-500 text-base" />
@@ -209,7 +209,6 @@ export function ManageEditModal({ facility }) {
                     />
                   </div>
 
-               
                   <div>
                     <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                       <TbCurrencyDollar className="text-emerald-500 text-base" />
@@ -225,7 +224,6 @@ export function ManageEditModal({ facility }) {
                     />
                   </div>
 
-                
                   <div>
                     <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                       <FiUsers className="text-emerald-500 text-base" />
@@ -241,7 +239,6 @@ export function ManageEditModal({ facility }) {
                     />
                   </div>
 
-                
                   <div className="md:col-span-2">
                     <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-600">
                       Available Time Slots
@@ -298,7 +295,6 @@ export function ManageEditModal({ facility }) {
                   </div>
                 </div>
 
-              
                 <div className="flex flex-row gap-3 pt-4 border-t border-slate-100">
                   <Button
                     type="button"
