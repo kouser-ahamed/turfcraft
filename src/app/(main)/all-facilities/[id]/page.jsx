@@ -1,4 +1,6 @@
 import BookingCard from "@/components/BookingCard";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,9 +11,14 @@ import { VscLocation } from "react-icons/vsc";
 const FacilityDetailsPage = async ({ params }) => {
   const { id } = await params;
 
+  const {token} = await auth.api.getToken({
+    headers:  await headers()
+});
+console.log("Token in FacilityDetailsPage:", token);
+
   const res = await fetch(`http://localhost:5000/facility/${id}`,{
     headers: {
-      authorization: "logged in"
+      authorization: `Bearer ${token}`
     }
   });
 
