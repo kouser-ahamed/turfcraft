@@ -15,6 +15,9 @@ const AddFacilityPage = () => {
     const user = userData.data?.user;
     console.log("Current User:", user);
 
+
+    
+
   const [timeSlots, setTimeSlots] = useState([]);
   const [currentSlot, setCurrentSlot] = useState("");       
 
