@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import {
   FiClock,
@@ -17,6 +18,14 @@ const ManageMyFacilities = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  
+  // user must be logged in to view their bookings then logout korle loginpage  ejbe
+
+  if (!session?.user) {
+    redirect("/login");
+  }
+   
+
 
   const user = session?.user;
 

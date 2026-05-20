@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { Button } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 import { FiCalendar, FiClock, FiDollarSign, FiLayers } from "react-icons/fi";
 
@@ -10,8 +11,10 @@ const MyBookings = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
-
+// user must be logged in to view their bookings then logout korle loginpage  ejbe
+if (!session?.user) {
+  redirect("/login");
+}
  
 
   const user = session?.user;

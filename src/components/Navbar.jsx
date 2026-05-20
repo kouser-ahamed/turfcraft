@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import NavLink from "./NavLink";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
@@ -34,6 +35,7 @@ const ProfileAvatar = ({ src, name, sizeClassName }) => {
 };
 
 const Navbar = () => {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
@@ -75,6 +77,7 @@ const Navbar = () => {
   const handleSignOut = async () => {
     await authClient.signOut();
     closeMenus();
+    router.push("/login");
   };
 
   return (

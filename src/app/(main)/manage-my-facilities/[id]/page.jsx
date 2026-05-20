@@ -9,11 +9,25 @@ import { MdAdd, MdSportsSoccer } from "react-icons/md";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { useParams, useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const ManageEditFacilitiesPage = ({ facility }) => {
   const params = useParams();
   const id = params?.id;
+
+   //  user ke login e pathabe jodi user logout kore jai tahole login page e chole jabe client side authentication check
+
+   const userData = authClient.useSession();
+  const user = userData.data?.user;
   const router = useRouter();
+
+  useEffect(() => {
+    if (!userData?.data?.user) {
+      router.push("/login");
+    }
+  }, [userData, router]);
+
+  // end of authentication check
 
   const [facilityData, setFacilityData] = useState(facility ?? null);
   const [isLoading, setIsLoading] = useState(!facility);
