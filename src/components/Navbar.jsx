@@ -139,7 +139,7 @@ const Navbar = () => {
 
           <li>
             <NavLink href="/manage-my-facilities">
-              Manage Facilities
+              Manage My Facilities
             </NavLink>
           </li>
         </ul>
@@ -229,7 +229,7 @@ const Navbar = () => {
                       onClick={closeMenus}
                       className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
                     >
-                      Manage Facilities
+                      Manage My Facilities
                     </Link>
 
                     <button
