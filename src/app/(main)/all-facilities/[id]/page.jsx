@@ -46,9 +46,9 @@ const FacilityDetailsPage = async ({ params }) => {
           </p>
 
           <div className="mt-8">
-            <Link
+              <Link
               href="/all-facilities"
-              className="inline-flex items-center justify-center rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700"
+              className="inline-flex items-center justify-center rounded-2xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-emerald-500/25"
             >
               Browse Facilities
             </Link>
@@ -82,11 +82,11 @@ const FacilityDetailsPage = async ({ params }) => {
                 alt={facilityName}
                 width={1400}
                 height={600}
-                className="h-[300px] w-full object-cover sm:h-[400px] lg:h-[460px] transition-transform duration-700 hover:scale-[1.02]"
+                className="h-75 w-full object-cover sm:h-100 lg:h-115 transition-transform duration-700 hover:scale-[1.02]"
                 priority
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent"></div>
 
               <div className="absolute left-6 top-6">
                 <span className="inline-flex items-center rounded-xl bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-emerald-800 backdrop-blur-md shadow-sm ring-1 ring-black/5">
@@ -96,12 +96,12 @@ const FacilityDetailsPage = async ({ params }) => {
             </div>
 
             <div className="border-b border-slate-100 pb-6">
-              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              <h1 className="text-3xl font-extrabold tracking-tight bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent sm:text-4xl lg:text-5xl">
                 {facilityName}
               </h1>
 
               <div className="mt-4 flex items-center gap-2 text-slate-500">
-                <VscLocation className="text-xl flex-shrink-0 text-rose-500" />
+                <VscLocation className="text-xl shrink-0 text-rose-500" />
                 <p className="text-base font-medium sm:text-lg text-slate-600">
                   {location}
                 </p>

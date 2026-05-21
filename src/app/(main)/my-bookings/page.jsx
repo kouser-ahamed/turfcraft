@@ -59,7 +59,7 @@ const MyBookings = async () => {
         <div className="mb-6 rounded-2xl border border-white/70 bg-white/75 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.06)] backdrop-blur-sm">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+              <h1 className="text-3xl font-black tracking-tight bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent sm:text-4xl">
                 My Bookings
               </h1>
               <p className="mt-2 text-sm font-medium text-slate-600">
@@ -72,7 +72,7 @@ const MyBookings = async () => {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-600">Total</p>
                 <p className="text-xl font-black text-slate-900">{bookings.length}</p>
               </div>
-              <Button className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white">New Booking</Button>
+              <Button className="rounded-full bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white shadow-md shadow-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/25">New Booking</Button>
             </div>
           </div>
         </div>

@@ -135,7 +135,7 @@ export function ManageEditModal({ facility }) {
 
   return (
     <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
-      <Button className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl border border-slate-200 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 hover:text-emerald-600 active:scale-[0.98]">
+      <Button className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-emerald-500/20 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]">
         <FiEdit3 className="text-base" />
         <span>Edit</span>
       </Button>
@@ -149,7 +149,7 @@ export function ManageEditModal({ facility }) {
               <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
                 <FiEdit3 className="size-5" />
               </div>
-              <Modal.Heading className="text-xl font-black tracking-tight text-slate-900">
+              <Modal.Heading className="text-xl font-black tracking-tight bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
                 Edit Facility Details
               </Modal.Heading>
             </Modal.Header>
@@ -263,7 +263,7 @@ export function ManageEditModal({ facility }) {
                       <button
                         type="button"
                         onClick={handleAddSlot}
-                        className="flex h-12 items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-5 font-bold text-xs uppercase tracking-wider text-white shadow-sm transition-colors"
+                        className="flex h-12 items-center justify-center gap-2 rounded-xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 px-5 font-bold text-xs uppercase tracking-wider text-white shadow-sm transition-colors"
                       >
                         <MdAdd className="text-lg" />
                         Add Slot
@@ -315,7 +315,7 @@ export function ManageEditModal({ facility }) {
                   <Button
                     type="submit"
                     disabled={isUpdating}
-                    className="flex-1 h-12 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition-colors disabled:opacity-50"
+                    className="flex-1 h-12 rounded-xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white font-bold text-xs uppercase tracking-wider transition-colors disabled:opacity-50"
                   >
                     {isUpdating ? "Saving..." : "Save Changes"}
                   </Button>

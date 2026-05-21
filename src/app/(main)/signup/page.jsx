@@ -69,7 +69,7 @@ export default function SignUpPage() {
       
       <Card className="border w-full max-w-md sm:max-w-lg py-6 sm:py-8 md:py-10 px-4 sm:px-6 rounded-xl shadow-sm">
         
-        <h1 className="text-center text-lg sm:text-2xl font-bold mb-4">
+        <h1 className="text-center text-lg sm:text-2xl font-bold mb-4 bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
           Registration
         </h1>
 
@@ -115,7 +115,7 @@ export default function SignUpPage() {
           </TextField>
 
           <div className="flex flex-col sm:flex-row gap-2">
-            <Button type="submit" className="w-full h-10 sm:h-11 text-sm">
+            <Button type="submit" className="w-full h-10 sm:h-11 text-sm bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white font-semibold shadow-md shadow-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/25">
               <Check />
               Register
             </Button>
@@ -132,7 +132,7 @@ export default function SignUpPage() {
           <Button
             onClick={handleGoogleSignIn}
             variant="outline"
-            className="w-full flex items-center justify-center gap-2 h-10 sm:h-11 text-sm"
+            className="w-full flex items-center justify-center gap-2 h-10 sm:h-11 text-sm border border-slate-200 bg-white/80 hover:border-emerald-200 hover:bg-emerald-50/70"
           >
             <GrGoogle />
             Sign in with Google

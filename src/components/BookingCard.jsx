@@ -113,7 +113,7 @@ const BookingCard = ({ facility }) => {
   return (
     <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-100/70 ring-1 ring-slate-100">
       <div className="mb-6 border-b border-slate-50 pb-4">
-        <h2 className="text-2xl font-black tracking-tight text-slate-800">
+        <h2 className="text-2xl font-black tracking-tight bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
           Reserve Your Slot
         </h2>
         <p className="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wider">
@@ -204,7 +204,7 @@ const BookingCard = ({ facility }) => {
         <Button
           type="submit"
           isLoading={loading}
-          className="h-12 w-full rounded-xl bg-emerald-600 text-sm font-bold text-white shadow-md shadow-emerald-600/10 transition-all duration-200 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-700/20 active:scale-[0.99]"
+          className="h-12 w-full rounded-xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-sm font-bold text-white shadow-md shadow-emerald-600/10 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-700/20 active:scale-[0.99]"
         >
           Confirm & Pay
         </Button>
