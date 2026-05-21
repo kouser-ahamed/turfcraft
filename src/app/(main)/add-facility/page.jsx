@@ -143,219 +143,292 @@ const AddFacilityPage = () => {
 
   return (
     <>
-      <div className="min-h-screen  px-4 py-10">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/40 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
-          <div className="relative overflow-hidden bg-linear-to-r from-green-500 via-emerald-500 to-teal-500 px-8 py-12 text-white md:px-12">
-            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-white/10 blur-3xl"></div>
+      <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.14),transparent_30%),radial-gradient(circle_at_top_right,rgba(14,165,233,0.1),transparent_28%),linear-gradient(180deg,#f8fafc_0%,#ffffff_45%,#f8fafc_100%)] px-4 py-10 sm:px-6 lg:px-8">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.025)_1px,transparent_1px)] bg-size-[40px_40px] opacity-50" />
 
-            <h1 className="relative text-3xl font-black md:text-5xl text-center">
-              Add Your Sports Facility
-            </h1>
-
-            <p className="relative  mt-3 max-w-2xl text-sm text-white/90 mx-auto text-center">
-              Create a beautiful listing and let players discover your venue.
-            </p>
-          </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-10 px-6 py-10 md:px-12"
-          >
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              {/* Facility Name */}
-              <div>
-                <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <MdSportsSoccer className="text-green-500" />
-                  Facility Name
-                </label>
-
-                <input
-                  type="text"
-                  name="facilityName"
-                  required
-                  placeholder="Champions Sports Complex"
-                  className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                />
-              </div>
-
-              {/* Facility Type */}
-              <div>
-                <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <MdSportsSoccer className="text-green-500" />
-                  Facility Type
-                </label>
-
-                <select
-                  name="facilityType"
-                  required
-                  defaultValue=""
-                  className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                >
-                  <option value="" disabled>
-                    Select Type
-                  </option>
-
-                  <option value="Football">Football</option>
-                  <option value="Badminton">Badminton</option>
-                  <option value="Swimming">Swimming</option>
-                  <option value="Tennis">Tennis</option>
-                  <option value="Volleyball">Volleyball</option>
-                </select>
-              </div>
-
-              {/* Image URL */}
-              <div>
-                <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <FiImage className="text-green-500" />
-                  Image URL (imgbb/postimage)
-                </label>
-
-                <input
-                  type="url"
-                  name="imageUrl"
-                  required
-                  placeholder="https://images.unsplash.com/sports-facility.jpg"
-                  className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                />
-              </div>
-
-              {/* Location */}
-              <div>
-                <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <HiOutlineLocationMarker className="text-green-500" />
-                  Location
-                </label>
-
-                <input
-                  type="text"
-                  name="location"
-                  required
-                  placeholder="Dhanmondi, Dhaka, Bangladesh"
-                  className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                />
-              </div>
-
-              {/* Price */}
-              <div>
-                <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <TbCurrencyDollar className="text-green-500" />
-                  Price Per Hour
-                </label>
-
-                <input
-                  type="number"
-                  name="pricePerHour"
-                  required
-                  placeholder="$100"
-                  min="1"
-                  step="1"
-                  inputMode="numeric"
-                  onInvalid={(e) => {
-                    e.currentTarget.setCustomValidity(
-                      "Price per hour must be greater than 0",
-                    );
-                  }}
-                  onInput={(e) => e.currentTarget.setCustomValidity("")}
-                  className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                />
-              </div>
-
-              {/* Capacity */}
-              <div>
-                <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <FiUsers className="text-green-500" />
-                  Capacity
-                </label>
-
-                <input
-                  type="number"
-                  name="capacity"
-                  required
-                  placeholder="22 Players"
-                  min="1"
-                  step="1"
-                  inputMode="numeric"
-                  onInvalid={(e) => {
-                    e.currentTarget.setCustomValidity(
-                      "Capacity must be greater than 0",
-                    );
-                  }}
-                  onInput={(e) => e.currentTarget.setCustomValidity("")}
-                  className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                />
-              </div>
-
-              {/* Time Slots */}
-              <div className="md:col-span-2">
-                <label className="mb-3 block text-sm font-semibold text-gray-700">
-                  Available Time Slots
-                </label>
-
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <input
-                    type="text"
-                    value={currentSlot}
-                    onChange={(e) => setCurrentSlot(e.target.value)}
-                    placeholder="08:00 AM - 09:00 AM"
-                    className="h-14 flex-1 rounded-2xl border border-gray-200 bg-gray-50 px-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={handleAddSlot}
-                    className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-green-500 to-emerald-500 px-6 font-semibold text-white shadow-lg transition hover:scale-[1.02]"
-                  >
-                    <MdAdd className="text-xl" />
-                    Add Slot
-                  </button>
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mb-6 overflow-hidden rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-linear-to-r from-emerald-50 via-sky-50 to-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+                  Facility Creator
                 </div>
-
-                {timeSlots.length > 0 && (
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {timeSlots.map((slot, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 rounded-full bg-linear-to-r from-green-100 to-emerald-100 px-4 py-2 text-sm font-medium text-green-700 shadow-sm"
-                      >
-                        {slot}
-
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveSlot(index)}
-                          className="text-lg text-red-500 transition hover:scale-110"
-                        >
-                          <IoIosRemoveCircle />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                  Add Your Sports Facility
+                </h1>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
+                  Create a polished listing with clear details so players can discover and book your venue faster.
+                </p>
               </div>
 
-              {/* Description */}
-              <div className="md:col-span-2">
-                <label className="mb-3 block text-sm font-semibold text-gray-700">
-                  Description
-                </label>
-
-                <textarea
-                  name="description"
-                  required
-                  placeholder="Describe your facility..."
-                  className="min-h-45 w-full resize-none rounded-3xl border border-gray-200 bg-gray-50 p-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
-                />
+              <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-end">
+                <div className="rounded-2xl border border-emerald-100 bg-linear-to-br from-white to-emerald-50 px-4 py-3 shadow-sm shadow-emerald-100/70">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-600">
+                    Slots
+                  </p>
+                  <p className="mt-1 text-2xl font-black text-slate-900">{timeSlots.length}</p>
+                </div>
+                <div className="rounded-2xl border border-sky-100 bg-linear-to-br from-white to-sky-50 px-4 py-3 shadow-sm shadow-sky-100/70">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-600">
+                    Status
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-slate-900">Ready to publish</p>
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="h-14 w-full rounded-2xl bg-linear-to-r from-green-500 via-emerald-500 to-teal-500 text-base font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
-            >
-              Add Facility
-            </button>
-          </form>
+          <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+            <div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+              <div className="border-b border-slate-100 bg-linear-to-r from-emerald-600 via-teal-500 to-sky-500 px-6 py-5 text-white sm:px-8">
+                <h2 className="text-xl font-black tracking-tight sm:text-2xl">
+                  Facility Details
+                </h2>
+                <p className="mt-1 text-sm text-white/85">
+                  Fill in the details below to create a compelling listing.
+                </p>
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-8 px-5 py-6 sm:px-8 sm:py-8"
+              >
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                  <div className="rounded-3xl border border-slate-100 bg-linear-to-br from-white via-emerald-50/40 to-white p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <MdSportsSoccer className="text-emerald-600" />
+                      Facility Name
+                    </label>
+
+                    <input
+                      type="text"
+                      name="facilityName"
+                      required
+                      placeholder="Champions Sports Complex"
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                    />
+                  </div>
+
+                  <div className="rounded-3xl border border-slate-100 bg-linear-to-br from-white via-sky-50/40 to-white p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <MdSportsSoccer className="text-sky-600" />
+                      Facility Type
+                    </label>
+
+                    <select
+                      name="facilityType"
+                      required
+                      defaultValue=""
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10"
+                    >
+                      <option value="" disabled>
+                        Select Type
+                      </option>
+
+                      <option value="Football">Football</option>
+                      <option value="Badminton">Badminton</option>
+                      <option value="Swimming">Swimming</option>
+                      <option value="Tennis">Tennis</option>
+                      <option value="Volleyball">Volleyball</option>
+                    </select>
+                  </div>
+
+                  <div className="rounded-3xl border border-slate-100 bg-linear-to-br from-white via-amber-50/40 to-white p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <FiImage className="text-amber-600" />
+                      Image URL (imgbb/postimage)
+                    </label>
+
+                    <input
+                      type="url"
+                      name="imageUrl"
+                      required
+                      placeholder="https://images.unsplash.com/sports-facility.jpg"
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10"
+                    />
+                  </div>
+
+                  <div className="rounded-3xl border border-slate-100 bg-linear-to-br from-white via-cyan-50/40 to-white p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <HiOutlineLocationMarker className="text-cyan-600" />
+                      Location
+                    </label>
+
+                    <input
+                      type="text"
+                      name="location"
+                      required
+                      placeholder="Dhanmondi, Dhaka, Bangladesh"
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10"
+                    />
+                  </div>
+
+                  <div className="rounded-3xl border border-slate-100 bg-linear-to-br from-white via-emerald-50/40 to-white p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <TbCurrencyDollar className="text-emerald-600" />
+                      Price Per Hour
+                    </label>
+
+                    <input
+                      type="number"
+                      name="pricePerHour"
+                      required
+                      placeholder="$100"
+                      min="1"
+                      step="1"
+                      inputMode="numeric"
+                      onInvalid={(e) => {
+                        e.currentTarget.setCustomValidity(
+                          "Price per hour must be greater than 0",
+                        );
+                      }}
+                      onInput={(e) => e.currentTarget.setCustomValidity("")}
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                    />
+                  </div>
+
+                  <div className="rounded-3xl border border-slate-100 bg-linear-to-br from-white via-sky-50/40 to-white p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <FiUsers className="text-sky-600" />
+                      Capacity
+                    </label>
+
+                    <input
+                      type="number"
+                      name="capacity"
+                      required
+                      placeholder="22 Players"
+                      min="1"
+                      step="1"
+                      inputMode="numeric"
+                      onInvalid={(e) => {
+                        e.currentTarget.setCustomValidity(
+                          "Capacity must be greater than 0",
+                        );
+                      }}
+                      onInput={(e) => e.currentTarget.setCustomValidity("")}
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10"
+                    />
+                  </div>
+
+                  <div className="md:col-span-2 rounded-3xl border border-slate-100 bg-linear-to-br from-white via-emerald-50/30 to-sky-50/30 p-4 shadow-sm">
+                    <label className="mb-3 block text-sm font-semibold text-slate-700">
+                      Available Time Slots
+                    </label>
+
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <input
+                        type="text"
+                        value={currentSlot}
+                        onChange={(e) => setCurrentSlot(e.target.value)}
+                        placeholder="08:00 AM - 09:00 AM"
+                        className="h-14 flex-1 rounded-2xl border border-slate-200 bg-white px-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                      />
+
+                      <button
+                        type="button"
+                        onClick={handleAddSlot}
+                        className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 px-6 font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-[1.02] hover:shadow-xl"
+                      >
+                        <MdAdd className="text-xl" />
+                        Add Slot
+                      </button>
+                    </div>
+
+                    {timeSlots.length > 0 && (
+                      <div className="mt-5 flex flex-wrap gap-3">
+                        {timeSlots.map((slot, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-2 rounded-full border border-emerald-100 bg-linear-to-r from-emerald-50 via-sky-50 to-cyan-50 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm"
+                          >
+                            {slot}
+
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveSlot(index)}
+                              className="text-lg text-rose-500 transition hover:scale-110"
+                            >
+                              <IoIosRemoveCircle />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="md:col-span-2 rounded-3xl border border-slate-100 bg-linear-to-br from-white via-slate-50 to-emerald-50/20 p-4 shadow-sm">
+                    <label className="mb-3 block text-sm font-semibold text-slate-700">
+                      Description
+                    </label>
+
+                    <textarea
+                      name="description"
+                      required
+                      placeholder="Describe your facility..."
+                      className="min-h-45 w-full resize-none rounded-3xl border border-slate-200 bg-white p-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="h-14 w-full rounded-2xl bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 text-base font-bold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
+                >
+                  Add Facility
+                </button>
+              </form>
+            </div>
+
+            <aside className="space-y-6">
+              <div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+                <div className="rounded-3xl bg-linear-to-br from-emerald-500 via-teal-500 to-sky-500 p-5 text-white shadow-lg shadow-emerald-500/15">
+                  <h3 className="text-lg font-black">Add Facility Card</h3>
+                  <p className="mt-2 text-sm text-white/85">
+                    Keep the listing clean, visual, and easy to scan.
+                  </p>
+
+                  <div className="mt-5 rounded-2xl bg-white/12 p-4 backdrop-blur-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-2xl bg-white/20" />
+                      <div className="min-w-0 flex-1">
+                        <div className="h-4 w-2/3 rounded-full bg-white/30" />
+                        <div className="mt-2 h-3 w-1/2 rounded-full bg-white/20" />
+                      </div>
+                    </div>
+                    <div className="mt-4 grid grid-cols-2 gap-3">
+                      <div className="rounded-2xl bg-white/15 p-3">
+                        <div className="h-3 w-14 rounded-full bg-white/25" />
+                        <div className="mt-2 h-4 w-20 rounded-full bg-white/35" />
+                      </div>
+                      <div className="rounded-2xl bg-white/15 p-3">
+                        <div className="h-3 w-14 rounded-full bg-white/25" />
+                        <div className="mt-2 h-4 w-16 rounded-full bg-white/35" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+                <h3 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500">
+                  Quick Tips
+                </h3>
+
+                <div className="mt-4 space-y-3 text-sm text-slate-600">
+                  <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4">
+                    Use a bright image with a clear facility angle.
+                  </div>
+                  <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-4">
+                    Add practical time slots that users can book easily.
+                  </div>
+                  <div className="rounded-2xl border border-amber-100 bg-amber-50/70 p-4">
+                    Keep the description short, accurate, and helpful.
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </>
