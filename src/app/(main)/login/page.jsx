@@ -65,7 +65,9 @@ export default function SignInPage() {
 
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-            Login
+            <span className="bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
+              Login
+            </span>
           </h1>
         </div>
 
@@ -104,7 +106,7 @@ export default function SignInPage() {
           <div className="flex flex-col gap-3 pt-1 sm:flex-row">
             <Button
               type="submit"
-              className="group h-11 w-full rounded-2xl bg-linear-to-r from-emerald-600 to-emerald-500 font-semibold text-white shadow-lg shadow-emerald-500/20 transition-all duration-200 hover:-translate-y-0.5 hover:from-emerald-500 hover:to-emerald-400 hover:shadow-xl hover:shadow-emerald-500/25 sm:h-12"
+              className="group h-11 w-full rounded-2xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 font-semibold text-white shadow-lg shadow-emerald-500/20 transition-all duration-200 hover:-translate-y-0.5 hover:from-emerald-500 hover:via-emerald-400 hover:to-lime-400 hover:shadow-xl hover:shadow-emerald-500/25 sm:h-12"
             >
               LogIn
             </Button>

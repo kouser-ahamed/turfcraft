@@ -153,7 +153,7 @@ const AddFacilityPage = () => {
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-linear-to-r from-emerald-50 via-sky-50 to-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
                   Facility Creator
                 </div>
-                <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
                   Turn Your Venue Into Revenue
                 </h1>
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
@@ -180,7 +180,7 @@ const AddFacilityPage = () => {
 
           <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
             <div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl">
-              <div className="border-b border-slate-100 bg-linear-to-r from-emerald-600 via-teal-500 to-sky-500 px-6 py-5 text-white sm:px-8">
+              <div className="border-b border-slate-100 bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 px-6 py-5 text-white sm:px-8">
                 <h2 className="text-xl font-black tracking-tight sm:text-2xl">
                   Facility Details
                 </h2>
@@ -328,7 +328,7 @@ const AddFacilityPage = () => {
                       <button
                         type="button"
                         onClick={handleAddSlot}
-                        className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 px-6 font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-[1.02] hover:shadow-xl"
+                        className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 px-6 font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-[1.02] hover:shadow-xl"
                       >
                         <MdAdd className="text-xl" />
                         Add Slot
@@ -373,7 +373,7 @@ const AddFacilityPage = () => {
 
                 <button
                   type="submit"
-                  className="h-14 w-full rounded-2xl bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 text-base font-bold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
+                  className="h-14 w-full rounded-2xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-base font-bold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
                 >
                   Add Facility
                 </button>
@@ -382,7 +382,7 @@ const AddFacilityPage = () => {
 
             <aside className="space-y-6">
               <div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl">
-                <div className="rounded-3xl bg-linear-to-br from-emerald-500 via-teal-500 to-sky-500 p-5 text-white shadow-lg shadow-emerald-500/15">
+                <div className="rounded-3xl bg-linear-to-br from-emerald-600 via-emerald-500 to-lime-500 p-5 text-white shadow-lg shadow-emerald-500/15">
                   <h3 className="text-lg font-black">Add Facility Card</h3>
                   <p className="mt-2 text-sm text-white/85">
                     Keep the listing clean, visual, and easy to scan.

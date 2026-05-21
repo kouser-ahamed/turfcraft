@@ -63,7 +63,7 @@ const FeedbackSlider = () => {
           <p className="text-xs tracking-[4px] uppercase text-blue-600 font-bold">
             User Testimonials
           </p>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 bg-gradient-to-r from-slate-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-black mt-4 bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
             What Players Say
           </h2>
           <p className="text-slate-600 mt-4 max-w-2xl mx-auto text-base font-medium">
@@ -126,7 +126,7 @@ const FeedbackSlider = () => {
                 </div>
 
                 <p className="text-slate-700 text-sm leading-relaxed flex-grow relative z-10 font-medium">
-                  "{item.comment}"
+                  &quot;{item.comment}&quot;
                 </p>
 
                 <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col gap-3 text-xs text-slate-600 relative z-10">

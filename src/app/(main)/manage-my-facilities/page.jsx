@@ -96,7 +96,7 @@ const ManageMyFacilities = async () => {
                 You haven&apos;t added any sports facility yet. Start earning today by listing your first venue!
               </p>
               <Link href="/add-facility" className="mt-6">
-                <Button className="bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 text-white font-bold rounded-2xl px-8 py-6 shadow-lg shadow-emerald-500/30 hover:shadow-2xl transition-all">
+                <Button className="bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white font-bold rounded-2xl px-8 py-6 shadow-lg shadow-emerald-500/30 hover:shadow-2xl transition-all">
                   ➕ Add Your First Facility
                 </Button>
               </Link>

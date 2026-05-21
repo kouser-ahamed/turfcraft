@@ -79,7 +79,7 @@ const ContactFeedbackPage = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight uppercase mb-3 animate-fade-in">
             Get in{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-slate-900">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500">
               Touch
             </span>
           </h1>
@@ -305,7 +305,7 @@ const ContactFeedbackPage = () => {
                     className={`w-full h-13 ${
                       loading
                         ? "bg-slate-400 cursor-not-allowed"
-                        : "bg-gradient-to-r from-blue-600 to-blue-500 hover:shadow-xl hover:shadow-blue-500/30"
+                        : "bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 hover:shadow-xl hover:shadow-emerald-500/30"
                     } text-white rounded-2xl text-sm uppercase tracking-widest font-bold flex items-center justify-center gap-3 transition-all duration-300 transform hover:-translate-y-0.5`}
                   >
                     {loading ? (

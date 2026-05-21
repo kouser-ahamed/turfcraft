@@ -21,7 +21,7 @@ const Banner = () => {
             
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-black mb-3 md:mb-5 leading-tight tracking-tight">
               Play Without Limits. <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-emerald-400 to-lime-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
                 Book in Seconds.
               </span>
             </h1>
@@ -33,7 +33,7 @@ const Banner = () => {
             <Link href="/all-facilities" passHref>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white font-semibold px-8 py-5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all text-xs sm:text-sm shadow-lg shadow-emerald-900/20"
+                className="bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white font-semibold px-8 py-5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all text-xs sm:text-sm shadow-lg shadow-emerald-900/20"
               >
                 Explore Facilities
               </Button>
