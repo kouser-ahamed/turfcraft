@@ -12,18 +12,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 
 const AddFacilityPage = () => {
-  const userData = authClient.useSession();
-  const user = userData.data?.user;
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
   console.log("Current User:", user);
 
  //  user ke login e pathabe jodi user logout kore jai tahole login page e chole jabe client side authentication check
   const router = useRouter();
 
   useEffect(() => {
-    if (!userData?.data?.user) {
-      router.push("/login");
+    if (isPending) {
+      return;
     }
-  }, [userData, router]);
+
+    if (!user) {
+      router.replace("/login");
+    }
+  }, [isPending, user, router]);
 
   // end of authentication check
 
@@ -141,7 +145,7 @@ const AddFacilityPage = () => {
     <>
       <div className="min-h-screen  px-4 py-10">
         <div className="mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/40 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
-          <div className="relative overflow-hidden bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 px-8 py-12 text-white md:px-12">
+          <div className="relative overflow-hidden bg-linear-to-r from-green-500 via-emerald-500 to-teal-500 px-8 py-12 text-white md:px-12">
             <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
             <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-white/10 blur-3xl"></div>
 
@@ -300,7 +304,7 @@ const AddFacilityPage = () => {
                   <button
                     type="button"
                     onClick={handleAddSlot}
-                    className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 font-semibold text-white shadow-lg transition hover:scale-[1.02]"
+                    className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-green-500 to-emerald-500 px-6 font-semibold text-white shadow-lg transition hover:scale-[1.02]"
                   >
                     <MdAdd className="text-xl" />
                     Add Slot
@@ -312,7 +316,7 @@ const AddFacilityPage = () => {
                     {timeSlots.map((slot, index) => (
                       <div
                         key={index}
-                        className="flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 px-4 py-2 text-sm font-medium text-green-700 shadow-sm"
+                        className="flex items-center gap-2 rounded-full bg-linear-to-r from-green-100 to-emerald-100 px-4 py-2 text-sm font-medium text-green-700 shadow-sm"
                       >
                         {slot}
 
@@ -339,7 +343,7 @@ const AddFacilityPage = () => {
                   name="description"
                   required
                   placeholder="Describe your facility..."
-                  className="min-h-[180px] w-full resize-none rounded-3xl border border-gray-200 bg-gray-50 p-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
+                  className="min-h-45 w-full resize-none rounded-3xl border border-gray-200 bg-gray-50 p-5 text-sm outline-none transition focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-100"
                 />
               </div>
             </div>
@@ -347,7 +351,7 @@ const AddFacilityPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="h-14 w-full rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-base font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
+              className="h-14 w-full rounded-2xl bg-linear-to-r from-green-500 via-emerald-500 to-teal-500 text-base font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70"
             >
               Add Facility
             </button>
