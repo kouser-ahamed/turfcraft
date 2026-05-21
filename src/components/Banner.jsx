@@ -27,7 +27,7 @@ const Banner = () => {
             </h1>
             
             <p className="text-xs sm:text-sm md:text-base mb-6 md:mb-8 max-w-[280px] sm:max-w-md md:max-w-xl text-slate-200 font-normal leading-relaxed">
-              Discover and reserve premium football turfs, indoor badminton courts, swimming lanes, and tennis courts near you. Experience seamless scheduling, instant slot confirmation, and hassle-free booking management—all in one premium platform.
+              Your ultimate sports facility booking platform. Reserve premium football turfs, cricket grounds, badminton courts, tennis courts, and swimming pools in real-time. Get instant confirmation, flexible cancellation, and 24/7 customer support.
             </p>
 
             <Link href="/all-facilities" passHref>
