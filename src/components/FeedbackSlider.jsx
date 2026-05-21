@@ -61,13 +61,14 @@ const FeedbackSlider = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-14">
           <p className="text-xs tracking-[4px] uppercase text-blue-600 font-bold">
-            ⭐ User Testimonials
+            User Testimonials
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 bg-gradient-to-r from-slate-900 to-blue-600 bg-clip-text text-transparent">
             What Players Say
           </h2>
           <p className="text-slate-600 mt-4 max-w-2xl mx-auto text-base font-medium">
-            Real experiences from athletes, coaches, and sports enthusiasts using TurfCraft to book their favorite facilities.
+            Real experiences from athletes, coaches, and sports enthusiasts
+            using TurfCraft to book their favorite facilities.
           </p>
         </div>
 
@@ -99,11 +100,16 @@ const FeedbackSlider = () => {
                       <h4 className="text-sm font-bold text-slate-900">
                         {item.name}
                       </h4>
-                      <p className="text-xs text-slate-500 font-medium">{item.role}</p>
+                      <p className="text-xs text-slate-500 font-medium">
+                        {item.role}
+                      </p>
                     </div>
                   </div>
 
-                  <FiMessageCircle className="text-slate-200 group-hover:text-blue-200 transition" size={28} />
+                  <FiMessageCircle
+                    className="text-slate-200 group-hover:text-blue-200 transition"
+                    size={28}
+                  />
                 </div>
 
                 <div className="flex gap-1 mb-4 relative z-10">
@@ -113,9 +119,7 @@ const FeedbackSlider = () => {
                       size={16}
                       fill={i < item.rating ? "#3b82f6" : "none"}
                       className={
-                        i < item.rating
-                          ? "text-blue-500"
-                          : "text-slate-200"
+                        i < item.rating ? "text-blue-500" : "text-slate-200"
                       }
                     />
                   ))}
