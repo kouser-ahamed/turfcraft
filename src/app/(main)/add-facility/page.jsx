@@ -154,10 +154,10 @@ const AddFacilityPage = () => {
                   Facility Creator
                 </div>
                 <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-                  Add Your Sports Facility
+                  Turn Your Venue Into Revenue
                 </h1>
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Create a polished listing with clear details so players can discover and book your venue faster.
+                  List your sports facility today and start receiving bookings from athletes. Manage availability, set your rates, and grow your earnings all in one place.
                 </p>
               </div>
 
