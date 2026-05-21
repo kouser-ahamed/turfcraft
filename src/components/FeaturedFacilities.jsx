@@ -35,7 +35,7 @@ const FeaturedFacilities = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-black mb-3 bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
           Featured Facilities
