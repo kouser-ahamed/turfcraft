@@ -135,7 +135,7 @@ export function ManageEditModal({ facility }) {
 
   return (
     <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
-      <Button className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-emerald-500/20 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]">
+      <Button className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-11 px-10 rounded-xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-emerald-500/20 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]">
         <FiEdit3 className="text-base" />
         <span>Edit</span>
       </Button>

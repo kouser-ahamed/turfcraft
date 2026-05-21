@@ -29,9 +29,9 @@ const FacilityDetailsPage = async ({ params }) => {
   if (!res.ok) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center px-4 mt-20">
-        <div className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-rose-50">
-            <span className="text-4xl text-yellow-300">
+        <div className="w-full max-w-lg rounded-3xl border border-emerald-100 bg-white p-10 text-center shadow-lg shadow-emerald-50/40 ring-1 ring-emerald-50">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50">
+            <span className="text-4xl text-emerald-600">
               <HiOutlineEmojiSad />
             </span>
           </div>
@@ -72,11 +72,11 @@ const FacilityDetailsPage = async ({ params }) => {
   } = facility;
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-12 antialiased">
+    <div className="min-h-screen bg-slate-50 py-12 antialiased">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-5 items-start">
           <div className="lg:col-span-3 space-y-8">
-            <div className="relative overflow-hidden rounded-3xl bg-slate-200 shadow-md ring-1 ring-slate-100">
+            <div className="relative overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-emerald-50 border border-emerald-100">
               <Image
                 src={imageUrl}
                 alt={facilityName}
@@ -89,13 +89,13 @@ const FacilityDetailsPage = async ({ params }) => {
               <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent"></div>
 
               <div className="absolute left-6 top-6">
-                <span className="inline-flex items-center rounded-xl bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-emerald-800 backdrop-blur-md shadow-sm ring-1 ring-black/5">
+                <span className="inline-flex items-center rounded-xl bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-emerald-800 backdrop-blur-md shadow-sm ring-1 ring-emerald-50">
                   {facilityType}
                 </span>
               </div>
             </div>
 
-            <div className="border-b border-slate-100 pb-6">
+            <div className="border-b border-emerald-50 pb-6">
               <h1 className="text-3xl font-extrabold tracking-tight bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent sm:text-4xl lg:text-5xl">
                 {facilityName}
               </h1>
@@ -109,7 +109,7 @@ const FacilityDetailsPage = async ({ params }) => {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="group rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-200/80">
+              <div className="group rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-emerald-200">
                 <div className="flex items-center gap-4">
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-colors group-hover:bg-emerald-100">
                     <MdOutlineReduceCapacity className="text-2xl" />
@@ -128,7 +128,7 @@ const FacilityDetailsPage = async ({ params }) => {
                 </div>
               </div>
 
-              <div className="group rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-200/80">
+              <div className="group rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-emerald-200">
                 <div className="flex items-center gap-4">
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-amber-50 text-amber-600 transition-colors group-hover:bg-amber-100">
                     <MdAttachMoney className="text-2xl" />
@@ -149,7 +149,7 @@ const FacilityDetailsPage = async ({ params }) => {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 border border-slate-100 shadow-sm">
+            <div className="rounded-2xl bg-white p-6 border border-emerald-100 shadow-sm">
               <h3 className="text-lg font-bold text-slate-900 border-b border-slate-50 pb-3 mb-4">
                 About this Facility
               </h3>
@@ -158,7 +158,7 @@ const FacilityDetailsPage = async ({ params }) => {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 border border-slate-100 shadow-sm">
+            <div className="rounded-2xl bg-white p-6 border border-emerald-100 shadow-sm">
               <h3 className="text-lg font-bold text-slate-900 border-b border-slate-50 pb-3 mb-4">
                 Available Time Slots
               </h3>
@@ -166,7 +166,7 @@ const FacilityDetailsPage = async ({ params }) => {
                 {availableTimeSlots?.map((slot, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center rounded-xl border border-emerald-100 bg-emerald-50/50 px-4 py-2.5 text-xs font-semibold text-emerald-700 transition-all hover:bg-emerald-50"
+                    className="inline-flex items-center rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2.5 text-xs font-semibold text-emerald-700 transition-all hover:bg-emerald-50 hover:scale-[1.02]"
                   >
                     {slot}
                   </span>
