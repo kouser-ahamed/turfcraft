@@ -41,7 +41,7 @@ export default function SignInPage() {
     } else {
       toast.success("Login Successfully", {
         position: "top-right",
-        autoClose: 1000,
+        autoClose: 2000,
       });
 
       setTimeout(() => {
@@ -61,21 +61,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="relative isolate flex min-h-[calc(100vh-5rem)] w-full items-center justify-center overflow-hidden px-4 py-10 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.18),transparent_36%),radial-gradient(circle_at_top_right,rgba(71,85,105,0.22),transparent_32%),linear-gradient(180deg,#f8fafc_0%,#eef6f2_100%)]" />
-      <div className="absolute -left-24 top-10 -z-10 h-40 w-40 rounded-full bg-emerald-400/20 blur-3xl" />
-      <div className="absolute -right-20 bottom-0 -z-10 h-48 w-48 rounded-full bg-slate-500/15 blur-3xl" />
+    <div className="w-full px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 lg:mt-4 flex justify-center mb-10">
 
-      <Card className="mx-auto w-full max-w-md rounded-3xl border border-white/70 bg-white/75 px-5 py-7 shadow-[0_20px_60px_-24px_rgba(15,23,42,0.35)] backdrop-blur-xl sm:max-w-lg sm:px-8 sm:py-9">
+      <Card className="border w-full max-w-md sm:max-w-lg py-6 sm:py-8 md:py-10 px-4 sm:px-6 rounded-xl shadow-sm">
         <ToastContainer />
 
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-            <span className="bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
-              Login
-            </span>
-          </h1>
-        </div>
+        <h1 className="text-center text-lg sm:text-2xl font-bold mb-4 bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
+          Login
+        </h1>
 
         <Form
           className="flex flex-col gap-4"
