@@ -67,7 +67,7 @@ export default function SignInPage() {
         <ToastContainer />
 
         <h1 className="text-center text-lg sm:text-2xl font-bold mb-4 bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
-          Login
+          Login Page
         </h1>
 
         <Form
