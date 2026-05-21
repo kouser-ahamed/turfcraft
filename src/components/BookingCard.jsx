@@ -32,6 +32,7 @@ const BookingCard = ({ facility }) => {
   const [loading, setLoading] = useState(false);
 
   const totalPrice = Number(hours || 0) * pricePerHour;
+  const bookingStatus = "Pending";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -137,6 +138,19 @@ const BookingCard = ({ facility }) => {
 
         <div>
           <label className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <FiLayers className="text-slate-400" />
+            Booking Status
+          </label>
+          <input
+            type="text"
+            value={bookingStatus}
+            readOnly
+            className="h-12 w-full rounded-xl border border-amber-100 bg-amber-50 px-4 text-sm font-semibold text-amber-700 outline-none cursor-not-allowed select-none"
+          />
+        </div>
+
+        <div>
+          <label className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
             <FiCalendar className="text-slate-400" />
             Booking Date
           </label>
@@ -158,7 +172,7 @@ const BookingCard = ({ facility }) => {
             value={timeSlot}
             onChange={(e) => setTimeSlot(e.target.value)}
             required
-            className="h-12 w-full rounded-xl border border-slate-200/80 bg-white px-4 text-sm text-slate-700 outline-none transition duration-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 hover:border-slate-300 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat"
+            className="h-12 w-full rounded-xl border border-slate-200/80 bg-white px-4 text-sm text-slate-700 outline-none transition duration-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 hover:border-slate-300 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-size-[1.25rem] bg-position-[right_1rem_center] bg-no-repeat"
           >
             <option value="">Select a time slot</option>
             {availableTimeSlots?.map((slot) => (
