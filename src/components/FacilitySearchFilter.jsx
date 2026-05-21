@@ -86,118 +86,148 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10">
-      <div className="mb-8">
-        <h1 className="pb-4 text-3xl font-bold text-slate-800">
-          All Facilities
-        </h1>
-        <p className="text-sm text-slate-500">
-          Find and book your favorite sports facility
-        </p>
-      </div>
+    <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.14),transparent_30%),radial-gradient(circle_at_top_right,rgba(14,165,233,0.12),transparent_26%),linear-gradient(180deg,#f8fafc_0%,#ffffff_38%,#f8fafc_100%)]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.03)_1px,transparent_1px)] bg-size-[42px_42px] opacity-40" />
 
-     
-      <div className="mb-8 space-y-4">
-      
-        <div className="relative">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
-          <input
-            type="text"
-            placeholder="Search facilities by name..."
-            value={search}
-            onChange={handleSearchChange}
-            className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-12 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-          />
-        </div>
+      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+        <div className="mb-8 overflow-hidden rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+                Explore Venues
+              </div>
+              <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                All Facilities
+              </h1>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
+                Discover modern sports spaces, narrow down by type, and book the right venue without friction.
+              </p>
+            </div>
 
-       
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xs transition-all hover:border-slate-300 hover:bg-slate-50 md:w-auto"
-          >
-            <FiFilter className="text-base" />
-            Filters
-          </button>
-
-        
-          {(search || selectedTypes.length > 0) && (
-            <button
-              onClick={handleClearFilters}
-              className="flex h-11 items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 text-xs font-bold uppercase tracking-wider text-rose-600 shadow-xs transition-all hover:border-rose-300 hover:bg-rose-100"
-            >
-              <FiX className="text-base" />
-              Clear All
-            </button>
-          )}
-        </div>
-
-    
-        {showFilters && (
-          <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
-            <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-600">
-              Sport Type
-            </h3>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
-              {sportTypes.map((type) => (
-                <label
-                  key={type}
-                  className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-3 cursor-pointer transition hover:border-emerald-300 hover:bg-emerald-50"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedTypes.includes(type)}
-                    onChange={() => handleTypeToggle(type)}
-                    className="h-4 w-4 rounded border-slate-300 text-emerald-600 accent-emerald-600 cursor-pointer"
-                  />
-                  <span className="text-xs font-semibold text-slate-700">
-                    {type}
-                  </span>
-                </label>
-              ))}
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-end">
+              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  Showing
+                </p>
+                <p className="mt-1 text-2xl font-black text-slate-900">{facilities.length}</p>
+              </div>
+              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  Filters
+                </p>
+                <p className="mt-1 text-2xl font-black text-slate-900">{selectedTypes.length}</p>
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
 
-   
-      {isLoading ? (
-        <div className="flex h-64 items-center justify-center">
-          <div className="text-center">
-            <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-emerald-600"></div>
-            <p className="text-sm font-semibold text-slate-600">
-              Loading facilities...
+        <div className="mb-8 rounded-[2rem] border border-white/70 bg-white/80 p-4 shadow-[0_20px_80px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:p-5">
+          <div className="space-y-4">
+            <div className="relative">
+              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search facilities by name..."
+                value={search}
+                onChange={handleSearchChange}
+                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50/80 pl-12 pr-4 text-sm font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
+              />
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-xs font-bold uppercase tracking-[0.18em] text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
+              >
+                <FiFilter className="text-base" />
+                {showFilters ? "Hide Filters" : "Filters"}
+              </button>
+
+              {(search || selectedTypes.length > 0) && (
+                <button
+                  onClick={handleClearFilters}
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-rose-200 bg-rose-50 px-5 text-xs font-bold uppercase tracking-[0.18em] text-rose-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:bg-rose-100"
+                >
+                  <FiX className="text-base" />
+                  Clear All
+                </button>
+              )}
+            </div>
+
+            {showFilters && (
+              <div className="rounded-[1.5rem] border border-slate-200 bg-linear-to-br from-slate-50 to-white p-4 sm:p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-xs font-black uppercase tracking-[0.22em] text-slate-600">
+                    Sport Type
+                  </h3>
+                  <p className="text-xs font-medium text-slate-500">
+                    Pick one or more categories
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+                  {sportTypes.map((type) => (
+                    <label
+                      key={type}
+                      className={`flex cursor-pointer items-center gap-3 rounded-2xl border p-3 transition-all hover:-translate-y-0.5 ${
+                        selectedTypes.includes(type)
+                          ? "border-emerald-300 bg-emerald-50 shadow-sm"
+                          : "border-slate-200 bg-white hover:border-emerald-200 hover:bg-emerald-50/70"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedTypes.includes(type)}
+                        onChange={() => handleTypeToggle(type)}
+                        className="h-4 w-4 rounded border-slate-300 text-emerald-600 accent-emerald-600 cursor-pointer"
+                      />
+                      <span className="text-sm font-semibold text-slate-700">
+                        {type}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {isLoading ? (
+          <div className="flex min-h-96 items-center justify-center rounded-[2rem] border border-white/70 bg-white/75 shadow-[0_20px_80px_rgba(15,23,42,0.06)] backdrop-blur-xl">
+            <div className="text-center">
+              <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-emerald-600" />
+              <p className="text-sm font-semibold text-slate-600">
+                Loading facilities...
+              </p>
+            </div>
+          </div>
+        ) : facilities.length === 0 ? (
+          <div className="rounded-[2rem] border border-white/70 bg-white/80 p-12 text-center shadow-[0_20px_80px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:p-16">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100 text-slate-400 shadow-inner">
+              <FiSearch className="text-2xl" />
+            </div>
+            <h3 className="text-xl font-black text-slate-900">
+              No Facilities Found
+            </h3>
+            <p className="mt-2 text-sm text-slate-500 sm:text-base">
+              Try adjusting your search or filter criteria.
             </p>
           </div>
-        </div>
-      ) : facilities.length === 0 ? (
-        <div className="rounded-3xl border border-slate-200 bg-white p-16 text-center shadow-sm">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
-            <FiSearch className="text-2xl" />
-          </div>
-          <h3 className="text-lg font-bold text-slate-800">
-            No Facilities Found
-          </h3>
-          <p className="mt-2 text-sm text-slate-500">
-            Try adjusting your search or filter criteria
-          </p>
-        </div>
-      ) : (
-        <>
-          <p className="mb-6 text-sm font-medium text-slate-600">
-            Found {facilities.length} facilit{facilities.length !== 1 ? "ies" : "y"}
-          </p>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {facilities.map((facility) => (
-              <AllFacilitiesCard
-                key={facility._id}
-                facility={facility}
-              />
-            ))}
-          </div>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <p className="text-sm font-semibold text-slate-600">
+                Found {facilities.length} facilit{facilities.length !== 1 ? "ies" : "y"}
+              </p>
+              <div className="h-px flex-1 bg-linear-to-r from-slate-200 to-transparent" />
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              {facilities.map((facility) => (
+                <AllFacilitiesCard key={facility._id} facility={facility} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
