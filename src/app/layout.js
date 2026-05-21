@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${outfit.className} h-full antialiased`}>
       <body>
         
-        <main>{children} </main>
+        <main className="">{children} </main>
        
         
       </body>
