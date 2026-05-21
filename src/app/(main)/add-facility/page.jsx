@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 const AddFacilityPage = () => {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
+  const ownerEmail = user?.email || "";
   console.log("Current User:", user);
 
  //  user ke login e pathabe jodi user logout kore jai tahole login page e chole jabe client side authentication check
@@ -96,7 +97,8 @@ const AddFacilityPage = () => {
       ...faceilityData,
       availableTimeSlots: timeSlots,
       userId: user?.id || "",
-      userEmail: user?.email || "",
+      userEmail: ownerEmail,
+      ownerEmail,
     };
 
     console.log(payload);
@@ -153,7 +155,7 @@ const AddFacilityPage = () => {
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-linear-to-r from-emerald-50 via-sky-50 to-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
                   Facility Creator
                 </div>
-                <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
                   Turn Your Venue Into Revenue
                 </h1>
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
@@ -368,6 +370,24 @@ const AddFacilityPage = () => {
                       placeholder="Describe your facility..."
                       className="min-h-45 w-full resize-none rounded-3xl border border-slate-200 bg-white p-5 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
                     />
+                  </div>
+
+                  <div className="md:col-span-2 rounded-3xl border border-slate-100 bg-linear-to-br from-white via-emerald-50/30 to-sky-50/30 p-4 shadow-sm">
+                    <label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      Owner Email
+                    </label>
+
+                    <input
+                      type="email"
+                      name="ownerEmail"
+                      value={ownerEmail}
+                      readOnly
+                      className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm text-slate-600 outline-none"
+                    />
+
+                    <p className="mt-2 text-xs text-slate-500">
+                      Auto-filled from your signed-in account and included when the facility is saved.
+                    </p>
                   </div>
                 </div>
 
