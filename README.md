@@ -1,4 +1,3 @@
-````md
 # ⚽ TurfCraft — Smart Sports Facility Booking Management Platform
 
 ## 📖 Introduction
@@ -380,6 +379,13 @@ The platform delivers a fast and smooth user experience even during heavy intera
 - dotenv
 
 ---
+
+# 🚀 Local Development Setup
+
+## 1️⃣ Clone Client Repository
+
+```bash
+git clone https://github.com/kouser-ahamed/turfcraft.git
 
 # 🚀 Local Development Setup
 
