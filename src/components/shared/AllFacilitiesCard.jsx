@@ -48,12 +48,12 @@ const AllFacilitiesCard = ({ facility }) => {
           </span>
         </div>
 
-        <div className="absolute bottom-4 left-4 right-4">
+        {/* <div className="absolute bottom-4 left-4 right-4">
           <div className={`inline-flex items-center gap-2 rounded-full bg-linear-to-r ${tone} px-3 py-1.5 text-xs font-semibold text-white shadow-lg shadow-slate-900/20`}>
             <MdOutlineReduceCapacity className="text-sm" />
             {capacity} Person Capacity
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="space-y-4 p-5">
@@ -70,7 +70,8 @@ const AllFacilitiesCard = ({ facility }) => {
         </h2>
 
         <div className="flex items-end justify-between gap-4 rounded-2xl border border-slate-100 bg-linear-to-br from-slate-50 via-white to-emerald-50/40 p-4">
-          <div>
+          <div  className="flex justify-between items-end-safe gap-10">
+            <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-600">
               Price
             </p>
@@ -78,6 +79,11 @@ const AllFacilitiesCard = ({ facility }) => {
               ${pricePerHour}
               <span className="ml-1 text-sm font-medium text-slate-500">/hr</span>
             </p>
+            </div>
+            <div className={`inline-flex items-center gap-2 rounded-full bg-linear-to-r ${tone} px-3 py-1.5 text-xs font-semibold text-white shadow-lg shadow-slate-900/20`}>
+            <MdOutlineReduceCapacity className="text-sm" />
+            {capacity} Person Capacity
+          </div>
           </div>
 
           {/* <div className="rounded-full border border-emerald-100 bg-white px-3 py-2 text-xs font-semibold text-emerald-700 shadow-sm">

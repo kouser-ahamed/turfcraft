@@ -16,10 +16,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import PasswordChecklist from "@/components/PasswordChecklist";
 
 export default function SignInPage() {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +56,10 @@ export default function SignInPage() {
     });
   };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
     <div className="relative isolate flex min-h-[calc(100vh-5rem)] w-full items-center justify-center overflow-hidden px-4 py-10 sm:px-6 lg:px-8">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.18),transparent_36%),radial-gradient(circle_at_top_right,rgba(71,85,105,0.22),transparent_32%),linear-gradient(180deg,#f8fafc_0%,#eef6f2_100%)]" />
@@ -71,7 +77,14 @@ export default function SignInPage() {
           </h1>
         </div>
 
-        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <Form
+          className="flex flex-col gap-4"
+          onSubmit={onSubmit}
+          onReset={() => {
+            setPassword("");
+            setErrorMessage("");
+          }}
+        >
           {errorMessage && (
             <div className="rounded-2xl border border-rose-200 bg-rose-50/90 px-4 py-3 text-center text-xs font-medium text-rose-600 shadow-sm sm:text-sm">
               {errorMessage}
@@ -95,11 +108,11 @@ export default function SignInPage() {
             </Label>
             <Input
               placeholder="Enter your password"
+              value={password}
+              onChange={handlePasswordChange}
               className="h-11 rounded-2xl border border-slate-200 bg-white/85 text-sm text-slate-900 shadow-sm transition duration-200 placeholder:text-slate-400 hover:border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 sm:h-12"
             />
-            <Description className="text-xs leading-5 text-slate-500 sm:text-sm">
-              Must be at least 8 characters with 1 uppercase and 1 number
-            </Description>
+            <PasswordChecklist password={password} />
             <FieldError />
           </TextField>
 

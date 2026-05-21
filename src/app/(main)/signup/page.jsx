@@ -16,12 +16,14 @@ import { useRouter } from "next/navigation";
 import { GrGoogle } from "react-icons/gr";
 import Link from "next/link";
 import { useState } from "react";
+import PasswordChecklist from "@/components/PasswordChecklist";
 
 export default function SignUpPage() {
   const router = useRouter();
 
   const [message, setMessage] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +53,8 @@ export default function SignUpPage() {
 
     setMessage("Registration successful..!");
 
-    e.target.reset();
+        e.target.reset();
+        setPassword("");
 
     setTimeout(() => {
       router.push("/login");
@@ -64,8 +67,12 @@ export default function SignUpPage() {
     });
   };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 md:mt-10 flex justify-center mb-10">
+    <div className="w-full px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 lg:mt-4 flex justify-center mb-10">
       
       <Card className="border w-full max-w-md sm:max-w-lg py-6 sm:py-8 md:py-10 px-4 sm:px-6 rounded-xl shadow-sm">
         
@@ -85,7 +92,15 @@ export default function SignUpPage() {
           </div>
         )}
 
-        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <Form
+          className="flex flex-col gap-4"
+          onSubmit={onSubmit}
+          onReset={() => {
+            setPassword("");
+            setMessage("");
+            setErrorMsg("");
+          }}
+        >
           
           <TextField isRequired name="name">
             <Label className="text-sm sm:text-base">Name</Label>
@@ -107,10 +122,13 @@ export default function SignUpPage() {
 
           <TextField isRequired name="password" type="password">
             <Label className="text-sm sm:text-base">Password</Label>
-            <Input placeholder="Enter password" className="h-10 sm:h-11 text-sm" />
-            <Description className="text-xs sm:text-sm">
-              Min 8 chars, 1 uppercase, 1 number
-            </Description>
+            <Input
+              placeholder="Enter password"
+              value={password}
+              onChange={handlePasswordChange}
+              className="h-10 sm:h-11 text-sm"
+            />
+            <PasswordChecklist password={password} />
             <FieldError />
           </TextField>
 
