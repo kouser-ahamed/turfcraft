@@ -19,6 +19,14 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
     "Volleyball",
   ];
 
+  const sportTypeStyles = {
+    Football: "border-emerald-300 bg-emerald-50 text-emerald-700",
+    Badminton: "border-amber-300 bg-amber-50 text-amber-700",
+    Swimming: "border-sky-300 bg-sky-50 text-sky-700",
+    Tennis: "border-lime-300 bg-lime-50 text-lime-700",
+    Volleyball: "border-rose-300 bg-rose-50 text-rose-700",
+  };
+
   const debounce = (func, delay) => {
     let timeoutId;
     return (...args) => {
@@ -86,14 +94,14 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.14),transparent_30%),radial-gradient(circle_at_top_right,rgba(14,165,233,0.12),transparent_26%),linear-gradient(180deg,#f8fafc_0%,#ffffff_38%,#f8fafc_100%)]">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.03)_1px,transparent_1px)] bg-size-[42px_42px] opacity-40" />
+    <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.16),transparent_30%),radial-gradient(circle_at_top_right,rgba(14,165,233,0.14),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.08),transparent_24%),linear-gradient(180deg,#f8fafc_0%,#ffffff_38%,#f8fafc_100%)]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.03)_1px,transparent_1px)] bg-size-[42px_42px] opacity-35" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <div className="mb-8 overflow-hidden rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-linear-to-r from-emerald-50 via-sky-50 to-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
                 Explore Venues
               </div>
               <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -105,14 +113,14 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-end">
-              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              <div className="rounded-2xl border border-emerald-100 bg-linear-to-br from-white to-emerald-50 px-4 py-3 shadow-sm shadow-emerald-100/60">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-600">
                   Showing
                 </p>
                 <p className="mt-1 text-2xl font-black text-slate-900">{facilities.length}</p>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              <div className="rounded-2xl border border-sky-100 bg-linear-to-br from-white to-sky-50 px-4 py-3 shadow-sm shadow-sky-100/60">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-600">
                   Filters
                 </p>
                 <p className="mt-1 text-2xl font-black text-slate-900">{selectedTypes.length}</p>
@@ -130,14 +138,14 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
                 placeholder="Search facilities by name..."
                 value={search}
                 onChange={handleSearchChange}
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50/80 pl-12 pr-4 text-sm font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
+                className="h-14 w-full rounded-2xl border border-slate-200 bg-linear-to-r from-white via-slate-50 to-emerald-50/40 pl-12 pr-4 text-sm font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
               />
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-xs font-bold uppercase tracking-[0.18em] text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-slate-200 bg-linear-to-r from-white to-emerald-50 px-5 text-xs font-bold uppercase tracking-[0.18em] text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700"
               >
                 <FiFilter className="text-base" />
                 {showFilters ? "Hide Filters" : "Filters"}
@@ -146,7 +154,7 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
               {(search || selectedTypes.length > 0) && (
                 <button
                   onClick={handleClearFilters}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-rose-200 bg-rose-50 px-5 text-xs font-bold uppercase tracking-[0.18em] text-rose-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:bg-rose-100"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-rose-200 bg-linear-to-r from-rose-50 to-amber-50 px-5 text-xs font-bold uppercase tracking-[0.18em] text-rose-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:bg-rose-100"
                 >
                   <FiX className="text-base" />
                   Clear All
@@ -170,7 +178,7 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
                       key={type}
                       className={`flex cursor-pointer items-center gap-3 rounded-2xl border p-3 transition-all hover:-translate-y-0.5 ${
                         selectedTypes.includes(type)
-                          ? "border-emerald-300 bg-emerald-50 shadow-sm"
+                          ? `${sportTypeStyles[type]} shadow-sm`
                           : "border-slate-200 bg-white hover:border-emerald-200 hover:bg-emerald-50/70"
                       }`}
                     >
@@ -218,7 +226,7 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
               <p className="text-sm font-semibold text-slate-600">
                 Found {facilities.length} facilit{facilities.length !== 1 ? "ies" : "y"}
               </p>
-              <div className="h-px flex-1 bg-linear-to-r from-slate-200 to-transparent" />
+              <div className="h-px flex-1 bg-linear-to-r from-emerald-200 via-sky-200 to-transparent" />
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
               {facilities.map((facility) => (
