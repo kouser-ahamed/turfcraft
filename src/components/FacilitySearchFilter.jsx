@@ -228,7 +228,7 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
               </p>
               <div className="h-px flex-1 bg-linear-to-r from-emerald-200 via-sky-200 to-transparent" />
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {facilities.map((facility) => (
                 <AllFacilitiesCard key={facility._id} facility={facility} />
               ))}
