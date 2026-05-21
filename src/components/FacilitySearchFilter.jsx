@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { FiSearch, FiFilter, FiX } from "react-icons/fi";
 import AllFacilitiesCard from "./shared/AllFacilitiesCard";
 
@@ -10,6 +10,9 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+  const searchTimeoutRef = useRef(null);
 
   const sportTypes = [
     "Football",
@@ -25,14 +28,6 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
     Swimming: "border-sky-300 bg-sky-50 text-sky-700",
     Tennis: "border-lime-300 bg-lime-50 text-lime-700",
     Volleyball: "border-rose-300 bg-rose-50 text-rose-700",
-  };
-
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => func(...args), delay);
-    };
   };
 
   const fetchFacilities = useCallback(
@@ -56,6 +51,7 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
         const res = await fetch(url);
         const data = await res.json();
         setFacilities(data);
+        setCurrentPage(1);
       } catch (error) {
         console.error("Error fetching facilities:", error);
       } finally {
@@ -66,9 +62,15 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
   );
 
   const debouncedSearch = useCallback(
-    debounce((searchTerm, types) => {
-      fetchFacilities(searchTerm, types);
-    }, 500),
+    (searchTerm, types) => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+
+      searchTimeoutRef.current = setTimeout(() => {
+        fetchFacilities(searchTerm, types);
+      }, 500);
+    },
     [fetchFacilities]
   );
 
@@ -91,6 +93,16 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
     setSearch("");
     setSelectedTypes([]);
     fetchFacilities("", []);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(facilities.length / itemsPerPage));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const startIndex = (safeCurrentPage - 1) * itemsPerPage;
+  const paginatedFacilities = facilities.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -229,10 +241,53 @@ const FacilitySearchFilter = ({ initialFacilities }) => {
               <div className="h-px flex-1 bg-linear-to-r from-emerald-200 via-sky-200 to-transparent" />
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {facilities.map((facility) => (
+              {paginatedFacilities.map((facility) => (
                 <AllFacilitiesCard key={facility._id} facility={facility} />
               ))}
             </div>
+
+            {facilities.length > itemsPerPage && (
+              <div className="mt-10 flex flex-col items-center gap-4">
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(Math.max(1, safeCurrentPage - 1))}
+                    disabled={safeCurrentPage === 1}
+                    className="inline-flex h-11 items-center justify-center rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                  >
+                    Prev
+                  </button>
+
+                  {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                    <button
+                      key={pageNumber}
+                      type="button"
+                      onClick={() => handlePageChange(pageNumber)}
+                      className={`inline-flex h-11 min-w-11 items-center justify-center rounded-full px-4 text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5 ${
+                        pageNumber === safeCurrentPage
+                          ? "bg-linear-to-r from-emerald-600 via-emerald-500 to-lime-500 text-white shadow-emerald-500/20"
+                          : "border border-slate-200 bg-white text-slate-600 hover:border-emerald-200 hover:text-emerald-700"
+                      }`}
+                    >
+                      {pageNumber}
+                    </button>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(Math.min(totalPages, safeCurrentPage + 1))}
+                    disabled={safeCurrentPage === totalPages}
+                    className="inline-flex h-11 items-center justify-center rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                  >
+                    Next
+                  </button>
+                </div>
+
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                  Page {safeCurrentPage} of {totalPages}
+                </p>
+              </div>
+            )}
           </>
         )}
       </div>
