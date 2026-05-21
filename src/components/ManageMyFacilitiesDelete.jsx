@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
+import { FiTrash2 } from "react-icons/fi";
 
 export function ManageMyFacilitiesDelete({ facility }) {
   const { _id, facilityName } = facility;
@@ -29,6 +30,7 @@ export function ManageMyFacilitiesDelete({ facility }) {
   return (
     <AlertDialog>
       <Button className="w-full md:w-auto h-11 px-5 rounded-xl border border-slate-200 bg-white text-xs font-bold  tracking-wider text-rose-600 shadow-xs transition-all duration-200 hover:bg-rose-50 hover:border-rose-200 active:scale-[0.98]">
+        <FiTrash2 className="text-base" />
         Delete Facility
       </Button>
       <AlertDialog.Backdrop>
